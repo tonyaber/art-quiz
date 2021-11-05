@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  max-height: 1024px;
+  background: url("../assets/img/background.jpg") no-repeat center/cover; 
+}
+.container {
+  width: 1000px;
+}
+
+header {
+  box-sizing: border-box;
+  height: 340px;
+  padding-top: 100px;
+}
+
+header h1 {
+  display: none;
+}
+
+header img {
+  display: block;
+  margin: 0 auto;
+}
+
+
+.start_page_type button {
+    padding: 0;
+    width: 415px;
+    height: 474px;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+}
+
+
+

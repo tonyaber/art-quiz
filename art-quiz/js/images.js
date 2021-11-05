@@ -18,7 +18,7 @@ const images = [
         name: 'Пир в доме Левия',
         year: '1563',
         imageNum: '2',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Илья Репин',
@@ -103,7 +103,7 @@ const images = [
         name: 'Отплытие святой Урсулы',
         year: '1614',
         imageNum: '14',
-        category: 'painting'
+        category: 'marine'
     },
     {
         author: 'Илья Репин',
@@ -383,7 +383,7 @@ const images = [
         name: 'Троица',
         year: '1411',
         imageNum: '54',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Василий Суриков',
@@ -481,7 +481,7 @@ const images = [
         name: 'Непорочное зачатие',
         year: '1678',
         imageNum: '68',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Теодор Жерико',
@@ -544,7 +544,7 @@ const images = [
         name: 'Кающаяся Марина Магдалина',
         year: '1565',
         imageNum: '77',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Веласкес',
@@ -558,7 +558,7 @@ const images = [
         name: 'Динарий Кесаря',
         year: '1516',
         imageNum: '79',
-        category: 'portrait'
+        category: 'religion'
     },
     {
         author: 'Карл Брюллов',
@@ -656,7 +656,7 @@ const images = [
         name: 'Тайная вечеря',
         year: '1498',
         imageNum: '93',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Жан Батист Грёз',
@@ -670,7 +670,7 @@ const images = [
         name: 'Волна',
         year: '1896',
         imageNum: '95',
-        category: 'romanticism'
+        category: 'marine'
     },
     {
         author: 'Кузьма Петров-Водкин',
@@ -733,7 +733,7 @@ const images = [
         name: 'Саломея',
         year: '1515',
         imageNum: '104',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Василий Кандинский',
@@ -817,7 +817,7 @@ const images = [
         name: 'Девятый вал',
         year: '1850',
         imageNum: '116',
-        category: 'landscape'
+        category: 'marine'
     },
     {
         author: 'Винсент ван Гог',
@@ -845,14 +845,14 @@ const images = [
         name: 'Праздник венков из роз',
         year: '1506',
         imageNum: '120',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Эль Греко',
         name: 'Изгнание торгующих из храма',
         year: '1600',
         imageNum: '121',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Илья Репин',
@@ -943,7 +943,7 @@ const images = [
         name: 'Мост в Шату',
         year: '1875',
         imageNum: '134',
-        category: 'expressionism'
+        category: 'marine'
     },
     {
         author: 'Сандро Боттичелли',
@@ -1104,14 +1104,14 @@ const images = [
         name: 'Адам и Ева',
         year: '1507',
         imageNum: '157',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Бартоломео Мурильо',
         name: 'Явление и дар Богородицы',
         year: '1655',
         imageNum: '158',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Василий Перов',
@@ -1188,7 +1188,7 @@ const images = [
         name: 'Мадонна с розой',
         year: '1518',
         imageNum: '169',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Василий Тропинин',
@@ -1251,7 +1251,7 @@ const images = [
         name: 'Праздник четок',
         year: '1506',
         imageNum: '178',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Пьер Огюст Ренуар',
@@ -1272,7 +1272,7 @@ const images = [
         name: 'Лунная ночь на Днепре',
         year: '1880',
         imageNum: '181',
-        category: 'landscape'
+        category: 'marine'
     },
     {
         author: 'Веласкес',
@@ -1321,7 +1321,7 @@ const images = [
         name: 'Сикстинская Мадонна',
         year: '1520',
         imageNum: '188',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Рембрандт',
@@ -1412,7 +1412,7 @@ const images = [
         name: 'Мадонна в скалах',
         year: '1486',
         imageNum: '201',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Аксели Галлен-Каллела',
@@ -1433,7 +1433,7 @@ const images = [
         name: 'Впечатление. Восходящее солнце',
         year: '1882',
         imageNum: '204',
-        category: 'impressionism'
+        category: 'marine'
     },
     {
         author: 'Рембрандт',
@@ -1454,7 +1454,7 @@ const images = [
         name: 'Лунная дорожка',
         year: '1886',
         imageNum: '207',
-        category: 'landscape'
+        category: 'marine'
     },
     {
         author: 'Винсент Ван Гог',
@@ -1524,7 +1524,7 @@ const images = [
         name: 'Буря',
         year: '1868',
         imageNum: '217',
-        category: 'landscape'
+        category: 'marine'
     },
     {
         author: 'Ян Вермеер',
@@ -1631,7 +1631,7 @@ const images = [
         name: 'Буря на море',
         year: '1873',
         imageNum: '232',
-        category: 'landscape'
+        category: 'marine'
     },
     {
         author: 'Эдгар Дега',
@@ -1652,7 +1652,7 @@ const images = [
         name: 'Святая Анна с Мадонной',
         year: '1510',
         imageNum: '235',
-        category: 'renaissance'
+        category: 'religion'
     },
     {
         author: 'Эль Греко',
@@ -1680,7 +1680,7 @@ const images = [
         name: 'Волна',
         year: '1889',
         imageNum: '239',
-        category: 'landscape'
+        category: 'marine'
     },
     {
         author: 'Эжен Делакруа',
