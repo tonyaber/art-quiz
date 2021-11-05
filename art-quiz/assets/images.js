@@ -1251,378 +1251,443 @@ const images = [
         name: 'Праздник четок',
         year: '1506',
         imageNum: '178',
+        category: 'renaissance'
     },
     {
         author: 'Пьер Огюст Ренуар',
         name: 'Портрет Жанны Самари',
         year: '1877',
         imageNum: '179',
+        category: 'portrait'
     },
     {
         author: 'Илья Репин',
         name: 'Садко',
         year: '1876',
         imageNum: '180',
+        category: 'surrealism'
     },
     {
         author: 'Архип Куинджи',
         name: 'Лунная ночь на Днепре',
         year: '1880',
         imageNum: '181',
+        category: 'landscape'
     },
     {
         author: 'Веласкес',
         name: 'Поклонение волхвов',
         year: '1619',
         imageNum: '182',
+        category: 'renaissance'
     },
     {
         author: 'Николай Богданов-Бельский',
         name: 'У дверей школы',
         year: '1897',
         imageNum: '183',
+        category: 'painting'
     },
     {
         author: 'Иероним Босх',
         name: 'Сад земных наслаждений',
         year: '1510',
         imageNum: '184',
+        category: 'surrealism'
     },
     {
         author: 'Корреджо',
         name: 'Даная',
         year: '1530',
         imageNum: '185',
+        category: 'renaissance'
     },
     {
         author: 'Питер Пауль Рубенс',
         name: 'Похищение дочерей Левкиппа',
         year: '1618',
         imageNum: '186',
+        category: 'renaissance'
     },
     {
         author: 'Жан Энгр',
         name: 'Большая одалиска',
         year: '1814',
         imageNum: '187',
+        category: 'portrait'
     },
     {
         author: 'Рафаэль',
         name: 'Сикстинская Мадонна',
         year: '1520',
         imageNum: '188',
+        category: 'renaissance'
     },
     {
         author: 'Рембрандт',
         name: 'Похищение Европы',
         year: '1632',
         imageNum: '189',
+        category: 'renaissance'
     },
     {
         author: 'Питер Пауль Рубенс',
         name: 'Похищение Орфии Бореем',
         year: '1615',
         imageNum: '190',
+        category: 'renaissance'
     },
     {
         author: 'Архип Куинджи',
         name: 'Украинская ночь',
         year: '1876',
         imageNum: '191',
+        category: 'landscape'
     },
     {
         author: 'Эдгар Дега',
         name: 'Танцовщицы у станка',
         year: '1877',
         imageNum: '192',
+        category: 'impressionism'
     },
     {
         author: 'Алексей Венецианов',
         name: 'На жатве. Лето',
         year: '1827',
         imageNum: '193',
+        category: 'romanticism'
     },
     {
         author: 'Пьер Огюст Ренуар',
         name: 'Две сестры',
         year: '1881',
         imageNum: '194',
+        category: 'impressionism'
     },
     {
         author: 'Рембрандт',
         name: 'Ночной дозор',
         year: '1642',
         imageNum: '195',
+        category: 'realism'
     },
     {
         author: 'Эдуар Мане',
         name: 'Бар в «Фоли-Бержер»',
         year: '1882',
         imageNum: '196',
+        category: 'expressionism'
     },
     {
         author: 'Никола Пуссен',
         name: 'Пейзаж с Полифемом',
         year: '1649',
         imageNum: '197',
+        category: 'landscape'
     },
     {
         author: 'Питер Брейгель',
         name: 'Притча о слепых',
         year: '1568',
         imageNum: '198',
+        category: 'renaissance'
     },
     {
         author: 'Виктор Васнецов',
         name: 'Иван-царевич на Сером Волке',
         year: '1888',
         imageNum: '199',
+        category: 'painting'
     },
     {
         author: 'Сандро Боттичелли',
         name: 'Рождение Венеры',
         year: '1486',
         imageNum: '200',
+        category: 'renaissance'
     },
     {
         author: 'Леонардо да Винчи',
         name: 'Мадонна в скалах',
         year: '1486',
         imageNum: '201',
+        category: 'renaissance'
     },
     {
         author: 'Аксели Галлен-Каллела',
         name: 'Любовники',
         year: '1916',
         imageNum: '202',
+        category: 'avant-garde'
     },
     {
         author: 'Винсент Ван Гог',
         name: 'Автопортрет с перевязанным ухом',
         year: '1889',
         imageNum: '203',
+        category: 'expressionism'
     },
     {
         author: 'Клод Моне',
         name: 'Впечатление. Восходящее солнце',
         year: '1882',
         imageNum: '204',
+        category: 'impressionism'
     },
     {
         author: 'Рембрандт',
         name: 'Возвращение блудного сына',
         year: '1662',
         imageNum: '205',
+        category: 'painting'
     },
     {
         author: 'Караваджо',
         name: 'Больной вакх',
         year: '1593',
         imageNum: '206',
+        category: 'portrait'
     },
     {
         author: 'Иван Айвазовский',
         name: 'Лунная дорожка',
         year: '1886',
         imageNum: '207',
+        category: 'landscape'
     },
     {
         author: 'Винсент Ван Гог',
         name: 'Пшеничное поле с кипарисами',
         year: '1889',
         imageNum: '208',
+        category: 'expressionism'
     },
     {
         author: 'Аксели Галлен-Каллела',
         name: 'Мальчик и ворона',
         year: '1884',
         imageNum: '209',
+        category: 'painting'
     },
     {
         author: 'Ян Вермеер',
         name: 'Астроном',
         year: '1668',
         imageNum: '210',
+        category: 'renaissance'
     },
     {
         author: 'Питер Пауль Рубенс',
         name: 'Союз Земли и Воды',
         year: '1618',
         imageNum: '211',
+        category: 'renaissance'
     },
     {
         author: 'Клод Моне',
         name: 'Стог сена в Живерни',
         year: '1886',
         imageNum: '212',
+        category: 'landscape'
     },
     {
         author: 'Жан Фрагонар',
         name: 'Задвижка',
         year: '1777',
         imageNum: '213',
+        category: 'renaissance'
     },
     {
         author: 'Эдуард Мане',
         name: 'Бар в Фоли-Бержер',
         year: '1882',
         imageNum: '214',
+        category: 'avant-garde'
     },
     {
         author: 'Винсент Ван Гог',
         name: 'Ночное кафе в Арле',
         year: '1888',
         imageNum: '215',
+        category: 'expressionism'
     },
     {
         author: 'Клод Моне',
         name: 'Пруд с кувшинками',
         year: '1899',
         imageNum: '216',
+        category: 'expressionism'
     },
     {
         author: 'Иван Айвазовский',
         name: 'Буря',
         year: '1868',
         imageNum: '217',
+        category: 'landscape'
     },
     {
         author: 'Ян Вермеер',
         name: 'Кружевница',
         year: '1671',
         imageNum: '218',
+        category: 'portrait'
+
     },
     {
         author: 'Карл Брюллов',
         name: 'Автопортрет',
         year: '1848',
         imageNum: '219',
+        category: 'portrait'
+
     },
     {
         author: 'Питер Брейгель',
         name: 'Вавилонская башня',
         year: '1563',
         imageNum: '220',
+        category: 'surrealism'
     },
     {
         author: 'Поль Гоген',
         name: 'Кафе в Арле',
         year: '1888',
         imageNum: '221',
+        category: 'avant-garde'
     },
     {
         author: 'Иван Шишкин',
         name: 'Сосновый бор',
         year: '1895',
         imageNum: '222',
+        category: 'landscape'
     },
     {
         author: 'Клод Моне',
         name: 'Завтрак на траве',
         year: '1865',
         imageNum: '223',
+        category: 'impressionism'
     },
     {
         author: 'Рафаэль',
         name: 'Святой Георгий и дракон',
         year: '1506',
         imageNum: '224',
+        category: 'renaissance'
     },
     {
         author: 'Пабло Пикассо',
         name: 'Любительница абсента',
         year: '1901',
         imageNum: '225',
+        category: 'surrealism'
     },
     {
         author: 'Эдгар Дега',
         name: 'Перед репетицией',
         year: '1880',
         imageNum: '226',
+        category: 'expressionism'
     },
     {
         author: 'Николай Рерих',
         name: 'Помни!',
         year: '1924',
         imageNum: '227',
+        category: 'surrealism'
     },
     {
         author: 'Илья Репин',
         name: 'Стрекоза',
         year: '1884',
         imageNum: '228',
+        category: 'romanticism'
     },
     {
         author: 'Клод Моне',
         name: 'Мост Ватерлоо, туман',
         year: '1903',
         imageNum: '229',
+        category: 'impressionism'
     },
     {
         author: 'Исаак Левитан',
         name: 'Весна – большая вода',
         year: '1897',
         imageNum: '230',
+        category: 'landscape'
     },
     {
         author: 'Аксели Галлен-Каллела',
         name: 'Первый урок',
         year: '1889',
         imageNum: '231',
+        category: 'realism'
     },
     {
         author: 'Иван Айвазовский',
         name: 'Буря на море',
         year: '1873',
         imageNum: '232',
+        category: 'landscape'
     },
     {
         author: 'Эдгар Дега',
         name: 'Балетный класс',
         year: '1874',
         imageNum: '233',
+        category: 'expressionism'
     },
     {
         author: 'Николай Рерих',
         name: 'Горная обитель',
         year: '1933',
         imageNum: '234',
+        category: 'impressionism'
     },
     {
         author: 'Леонардо да Винчи',
         name: 'Святая Анна с Мадонной',
         year: '1510',
         imageNum: '235',
+        category: 'renaissance'
     },
     {
         author: 'Эль Греко',
         name: 'Мальчик, зажигающий свечу',
         year: '1572',
         imageNum: '236',
+        category: 'painting'
     },
     {
         author: 'Пабло Пикассо',
         name: 'Дружба',
         year: '1908',
         imageNum: '237',
+        category: 'avant-garde'
     },
     {
         author: 'Аксели Галлен-Каллела',
         name: 'Девушка на ветру',
         year: '1893',
         imageNum: '238',
+        category: 'romanticism'
     },
     {
         author: 'Иван Айвазовский',
         name: 'Волна',
         year: '1889',
         imageNum: '239',
+        category: 'landscape'
     },
     {
         author: 'Эжен Делакруа',
         name: 'Автопортрет',
         year: '1837',
         imageNum: '240',
+        category: 'portrait'
     },
 ];
 

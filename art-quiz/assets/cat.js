@@ -1,10 +1,10 @@
-category: 'realism'
-category: 'impressionism'           
-category: 'renaissance'
-category: 'portrait'
-category: 'painting'
-category: 'landscape'
-category: 'avant-garde'               7
-category: 'surrealism'             5
-category: 'romanticism'             
-category: 'expressionism'          
+category: 'realism' - 34 
+category: 'impressionism' - 17         
+category: 'renaissance' - 60
+category: 'portrait' - 31 
+category: 'painting' - 25
+category: 'landscape' - 25
+category: 'avant-garde' - 11
+category: 'surrealism' - 10
+category: 'romanticism' - 18            
+category: 'expressionism' - 20
