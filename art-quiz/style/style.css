@@ -85,7 +85,7 @@ header img {
 
 .categories_top {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   text-transform: uppercase;
   align-content: left;
 }

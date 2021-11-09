@@ -1682,13 +1682,6 @@ const images = [
         imageNum: '239',
         category: 'marine'
     },
-    {
-        author: 'Эжен Делакруа',
-        name: 'Автопортрет',
-        year: '1837',
-        imageNum: '240',
-        category: 'portrait'
-    },
 ];
 
 export default images;

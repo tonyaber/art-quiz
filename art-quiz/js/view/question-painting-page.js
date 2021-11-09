@@ -1,5 +1,5 @@
 const createQuestionPaintingPage =() => {
-  return `  <header class="container question_header">
+  return `<header class="container question_header">
     <h1>ArtQuiz</h1>
     <div class="question_header_container">
       <img src="./assets/img/logo.png" alt="logo">
