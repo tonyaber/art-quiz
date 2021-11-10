@@ -1,6 +1,5 @@
 import Abstract from "./abstract.js";
-const createCategoriesPage = (questions) => {
-  console.log(questions)
+const createCategoriesPageMain = (questions) => {
   const createItemTemplate = (i) => {
     return `<div class="categories_item">
       <h3>${i+1}</h3>
@@ -10,36 +9,32 @@ const createCategoriesPage = (questions) => {
   }
   const template = new Array(12).fill(null).map((item, index) => item = createItemTemplate(index)).join('');
 
-  return `<header class="container categories_header">
-  <h1>ArtQuiz</h1>
-  <img src="./assets/img/logo.png" alt="logo">
-</header>
-<main class="container categories_main">
- <div class="categories_top">
-    <button class="categories_home">Home</button>
-    <h2>Categories</h2>
-    <button class="categories_settings">Settings</button>
-  </div>
-  <div class="categories_list">
-    ${template}
-  </div>
-</main>`
+  return `<div class="categories_main">
+    <div class="categories_top">
+      <button class="categories_home">Home</button>
+      <h2>Categories</h2>
+      <button class="categories_settings">Settings</button>
+    </div>
+    <div class="categories_list">
+      ${template}
+    </div>
+  </div>`
 }
 
-export default class CategoriesPage extends Abstract{
+export default class CategoriesPageMain extends Abstract{
   constructor(questions) {
     super();
     this._questions = questions;
     this._categoriesChangeHandler = this._categoriesChangeHandler.bind(this);
+    this._categoriesBackToMainHandler = this._categoriesBackToMainHandler.bind(this);
   }
 
   setQuestion(questions) {
-    this._questions = questions;
+    this._questions = questions;    
   }
-
   
-  getTemplate() {
-    return createCategoriesPage(this._questions);
+  getTemplate() {    
+    return createCategoriesPageMain(this._questions);
   }
 
   _categoriesChangeHandler(index) {
@@ -52,5 +47,14 @@ export default class CategoriesPage extends Abstract{
       item.addEventListener('click',()=> this._categoriesChangeHandler(index))
     })
   }
+  _categoriesBackToMainHandler(evt) {
+    evt.preventDefault();
+    this._callback.backToMain()
+  }
 
+  backToMain(callback) {
+    this._callback.backToMain = callback;
+    this.getElement().querySelector('.categories_home').addEventListener('click', this._categoriesBackToMainHandler);
+
+  }
 }

@@ -9,9 +9,39 @@ body {
   background: url("../assets/img/background.jpg") no-repeat center/cover; 
   font-family: 'Montserrat', sans-serif;
 }
+
+header,
+main {
+  position: relative;
+}
+
+header{
+  height: 120px;
+}
+
+main{ 
+  header: 904px
+}
+.pages {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .container {
   width: 1000px;
   margin: 0 auto;
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;  
+  transition: all 0.5s ease-in;
+}
+
+.show {
+  visibility: visible;
+  opacity: 1;  
+  transition: all 0.5s ease-in;
 }
 
 header {
