@@ -6,7 +6,6 @@ export default class Abstract {
   }
 
   getElement() {
-    console.log(this._element)
     if (!this._element) {
       this._element = createElement(this.getTemplate());
     }

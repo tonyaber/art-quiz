@@ -15,6 +15,10 @@ export default class QuestionModel{
       .then((questions)=>this._allQuestions=questions)
   }
 
+  getAllQuestions() {
+    return this._allQuestions;
+  }
+
   getCategories(type) {
     this._type = type;
     switch (this._type) {

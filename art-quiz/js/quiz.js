@@ -31,7 +31,6 @@ export default class Quiz {
     this._startPageMain = new StartPageMain();
     this._categoriesPageHeader = new CategoriesPageHeader();
     this._categoriesPageMain = new CategoriesPageMain(this._categories);
-    
     this._renderStartPage();
   }
 
@@ -97,6 +96,7 @@ export default class Quiz {
   }
 
   _renderQuestion() {
+    this._allQuestions = this._questionModel.getAllQuestions();
     this._questionPainingHeader = new QuestionPaintingHeader();    
     renderElement(this._questionPainingHeader, header);
     this._showQuestion();
