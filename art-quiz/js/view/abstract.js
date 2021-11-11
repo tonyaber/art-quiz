@@ -18,8 +18,6 @@ export default class Abstract {
     setTimeout(() => {
       this.getElement().remove();
       this._element = null;
-    }, 500);
-    
-    
+    }, 500);    
   }
 }

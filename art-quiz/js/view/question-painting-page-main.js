@@ -1,9 +1,9 @@
 import Abstract from "./abstract.js";
 
 const createQuestionPaintingPageMain = (question, allQuestions) => {
-
-  const wrongAuthors = new Array(240).fill(null)
-    .map((item, index) => item = allQuestions[index].author).filter(item => item != question.author)
+  const uniqueAuthors = [...new Set(allQuestions.map(item => item.author))]
+  
+  const wrongAuthors = uniqueAuthors.filter(item => item != question.author)
     .sort(() => Math.random() - 0.5).slice(0, 3);
   wrongAuthors.push(question.author);
 
@@ -43,7 +43,7 @@ export default class QuestionPaintingMain extends Abstract {
     super();
     this._question = question;
     this._allQuestions = allQuestions;
-    this._nextImageHandler = this._nextImageHandler.bind(this)
+    this._checkAnswerHandler = this._checkAnswerHandler.bind(this)
   }
 
   setQuestion(question) {
@@ -54,15 +54,15 @@ export default class QuestionPaintingMain extends Abstract {
   getTemplate() {
     return createQuestionPaintingPageMain(this._question, this._allQuestions)
   }
-  _nextImageHandler(evt) {
-    console.log(evt.target.textContent)
-    this._callback.nextImage();
+  
+  _checkAnswerHandler(evt) {
+    this._callback.checkAnswer(evt.target.textContent);
   }
 
-  nextImage(callback) {
-    this._callback.nextImage = callback;
+  checkAnswer(callback) {
+    this._callback.checkAnswer = callback;
     this.getElement().querySelectorAll('.question_painting_answers li').forEach(item => {
-      item.addEventListener('click', this._nextImageHandler)
+      item.addEventListener('click', this._checkAnswerHandler)
     })
   }
 }

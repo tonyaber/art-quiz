@@ -1,4 +1,4 @@
-import { renderElement } from './utils.js';
+import { renderElement, renderPopup } from './utils.js';
 import StartPageHeader from "./view/start-page-header.js";
 import StartPageMain from "./view/start-page-main.js";
 import CategoriesPageMain from "./view/categories-page-main.js";
@@ -6,9 +6,11 @@ import CategoriesPageHeader from './view/categories-page-header.js';
 import QuestionPaintingMain from './view/question-painting-page-main.js';
 import QuestionPaintingHeader from './view/question-painting-page-header.js';
 import QuestionModel from './question-model.js';
+import Popup from './view/popup.js';
 
 const header = document.querySelector('header');
-const main = document.querySelector('main')
+const main = document.querySelector('main');
+const body = document.querySelector('body');
 
 export default class Quiz {
   constructor() {
@@ -21,6 +23,7 @@ export default class Quiz {
     this._categoriesQuestions = [];
     this._typeChangeHandler = this._typeChangeHandler.bind(this);
     this._categoriesChangeHandler = this._categoriesChangeHandler.bind(this);
+    this._checkAnswerHandler = this._checkAnswerHandler.bind(this);
     this._nextImageHandler = this._nextImageHandler.bind(this);
     this._backToMainHandler = this._backToMainHandler.bind(this);
   }
@@ -78,10 +81,12 @@ export default class Quiz {
 
   _nextImageHandler() {
     if (this._indexQuestion < 9) {
+      this._popup.destroy();
       this._questionPainingMain.destroy();
       this._indexQuestion++;
       this._showQuestion();
     } else {
+      this._popup.destroy();
       this._questionPainingMain.destroy();
       this._questionPainingHeader.destroy()
       this._renderCategoriesPage()
@@ -92,7 +97,7 @@ export default class Quiz {
     this._question = this._categoriesQuestions[this._indexQuestion];
     this._questionPainingMain = new QuestionPaintingMain(this._question, this._allQuestions);
     renderElement(this._questionPainingMain, main);
-    this._questionPainingMain.nextImage(this._nextImageHandler)
+    this._questionPainingMain.checkAnswer(this._checkAnswerHandler)
   }
 
   _renderQuestion() {
@@ -102,7 +107,16 @@ export default class Quiz {
     this._showQuestion();
   }
 
-  checkAnswer() {
-    
+  _checkAnswerHandler(answer) {
+    const check = answer == this._question.author
+    if (check) {
+      this._popup = new Popup(this._question, true);
+      
+    } else {
+      this._popup = new Popup(this._question, false);
+    }
+    this._questionModel.setCheckAnswer(this._indexQuestion, check)
+    this._popup.nextImage(this._nextImageHandler)
+    renderPopup(this._popup, body);
   }
 }

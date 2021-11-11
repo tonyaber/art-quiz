@@ -2,11 +2,17 @@ export default class QuestionModel{
   constructor() {
     this._allQuestions = [];
     this._categories = [];
-    this._categoriesQuestions = [];
-    this._question = {};
     this._type = '';
-    this._indexCategoryStart = 0;
+    this._indexCategory = 0;
+    this._answers = {};
     this._getAllQuestions();
+    this._createAnswer();
+  }
+
+  _createAnswer() {
+    new Array(24).fill(null).map((item, index) => item = index).forEach(item => {
+      this._answers[item] = {};
+    });
   }
 
   _getAllQuestions(){
@@ -35,13 +41,17 @@ export default class QuestionModel{
   getCategoriesQuestions(index) {
     switch (this._type) {
       case 'artists':
-        this._indexCategoryStart = index;
+        this._indexCategory = index;
         break;
       default:
-        this._indexCategoryStart = index + 12;
+        this._indexCategory = index + 12;
         break;
     }
-    return this._allQuestions.slice(this._indexCategoryStart * 10, this._indexCategoryStart * 10 + 10)
+    return this._allQuestions.slice(this._indexCategory * 10, this._indexCategory * 10 + 10)
+  }
+
+  setCheckAnswer(index, check) {
+    this._answers[this._indexCategory][index] = check;
   }
 
 }
