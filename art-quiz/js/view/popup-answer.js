@@ -2,7 +2,7 @@ import Abstract from "./abstract.js"
 
 const createPopup = (question, check) => {
   return `<div class="popup">
-      <div class="modal">
+      <div class="modal_answer">
         <img class="check" src="./assets/svg/${check?'correct_answer':'wrong_answer'}.svg" alt="check">
         <img class="painting" src="./assets/img/paintings/${question.imageNum}.jpg" alt="answer">
         <div class="answer">
@@ -15,7 +15,7 @@ const createPopup = (question, check) => {
     </div>`
 }
 
-export default class Popup extends Abstract {
+export default class PopupAnswer extends Abstract {
   constructor(question, check) {
     super();
     this._question = question;

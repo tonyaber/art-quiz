@@ -6,7 +6,8 @@ import CategoriesPageHeader from './view/categories-page-header.js';
 import QuestionPaintingMain from './view/question-painting-page-main.js';
 import QuestionPaintingHeader from './view/question-painting-page-header.js';
 import QuestionModel from './question-model.js';
-import Popup from './view/popup.js';
+import PopupAnswer from './view/popup-answer.js';
+import PopupEndOfCategory from './view/popup-end-of-category.js';
 
 const header = document.querySelector('header');
 const main = document.querySelector('main');
@@ -26,6 +27,7 @@ export default class Quiz {
     this._checkAnswerHandler = this._checkAnswerHandler.bind(this);
     this._nextImageHandler = this._nextImageHandler.bind(this);
     this._backToMainHandler = this._backToMainHandler.bind(this);
+    this._endOfCategoryHandler = this._endOfCategoryHandler.bind(this);
   }
 
   init() {
@@ -81,16 +83,23 @@ export default class Quiz {
 
   _nextImageHandler() {
     if (this._indexQuestion < 9) {
-      this._popup.destroy();
+      this._popupAnswer.destroy();
       this._questionPainingMain.destroy();
       this._indexQuestion++;
       this._showQuestion();
     } else {
-      this._popup.destroy();
-      this._questionPainingMain.destroy();
-      this._questionPainingHeader.destroy()
-      this._renderCategoriesPage()
+      this._popupAnswer.destroy();
+      this._popupEndOfCategory = new PopupEndOfCategory(8);
+      renderPopup(this._popupEndOfCategory, body);
+      this._popupEndOfCategory.endOfCategory(this._endOfCategoryHandler);
     }
+  }
+
+  _endOfCategoryHandler() {
+    this._popupEndOfCategory.destroy();
+    this._questionPainingMain.destroy();
+    this._questionPainingHeader.destroy()
+    this._renderCategoriesPage()
   }
 
   _showQuestion() {   
@@ -110,13 +119,13 @@ export default class Quiz {
   _checkAnswerHandler(answer) {
     const check = answer == this._question.author
     if (check) {
-      this._popup = new Popup(this._question, true);
+      this._popupAnswer = new PopupAnswer(this._question, true);
       
     } else {
-      this._popup = new Popup(this._question, false);
+      this._popupAnswer = new PopupAnswer(this._question, false);
     }
     this._questionModel.setCheckAnswer(this._indexQuestion, check)
-    this._popup.nextImage(this._nextImageHandler)
-    renderPopup(this._popup, body);
+    this._popupAnswer.nextImage(this._nextImageHandler)
+    renderPopup(this._popupAnswer, body);
   }
 }

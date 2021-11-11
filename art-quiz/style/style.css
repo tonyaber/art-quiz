@@ -20,7 +20,7 @@ header{
 }
 
 main{ 
-  header: 904px
+  height: 904px
 }
 .pages {
   position: absolute;
@@ -329,7 +329,7 @@ header img {
   z-index:20;
 }
 
-.modal { 
+.modal_answer { 
   margin: 0 auto;
   padding-top: 20px;
   width: 582px;
@@ -344,7 +344,7 @@ header img {
   height: 400px;
 }
 
-.modal .check {
+.modal_answer .check {
   display: block;
   margin: 0 auto 25px;
 }
@@ -360,6 +360,41 @@ header img {
 }
 
 .answer button{
+  display: block;
+  margin: 25px auto 0;
+  width: 150px;
+  height: 50px;
+  background-color: #660033;
+  border: none;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 22px;
+}
+.modal_result { 
+  margin: 0 auto;
+  padding-top: 40px;
+  width: 582px;
+  height: 500px;
+  background-color: #ffffff;
+} 
+.modal_result span {
+  display: block;
+  font-weight: bold;
+  margin-top: 25px;
+  font-size: 36px;
+  line-height: 44px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #660033;
+}
+
+.modal_result img{
+  display: block;
+  margin: 40px auto;
+}
+
+.modal_result button{
   display: block;
   margin: 25px auto 0;
   width: 150px;
