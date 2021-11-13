@@ -9,15 +9,16 @@ import QuestionModel from './question-model.js';
 import PopupAnswer from './view/popup-answer.js';
 import PopupEndOfCategory from './view/popup-end-of-category.js';
 
-const header = document.querySelector('header');
-const main = document.querySelector('main');
 const body = document.querySelector('body');
+const header = body.querySelector('header');
+const main = body.querySelector('main');
+
 
 export default class Quiz {
   constructor() {
     this._type = '';
-    this._indexCategoryStart = 0;
     this._indexQuestion = 0;
+    this._indexCategory = 0;
     this._allQuestions = [];
     this._categories = [];
     this._question = {};
@@ -46,8 +47,11 @@ export default class Quiz {
   }
 
   _renderCategoriesPage() {
+    this._categoriesPageMain.setQuestion(this._categories);
+    this._categoriesPageMain.setAnswers(this._questionModel.getCheckAnswerForCategory());
     renderElement(this._categoriesPageHeader, header);
-    renderElement(this._categoriesPageMain, main);    
+    renderElement(this._categoriesPageMain, main);
+    
     this._categoriesPageMain.setCategories(this._categoriesChangeHandler);
     this._categoriesPageMain.backToMain(this._backToMainHandler);
   }
@@ -62,14 +66,14 @@ export default class Quiz {
     this._startPageMain.destroy();
     this._type = type;
     this._categories = this._questionModel.getCategories(type)
-    this._categoriesPageMain.setQuestion(this._categories);
-   
+
     this._renderCategoriesPage();
   }
 
   _categoriesChangeHandler(index) {
+    this._indexCategory = index;
     this._indexQuestion = 0;
-    this._categoriesQuestions = this._questionModel.getCategoriesQuestions(index);
+    this._categoriesQuestions = this._questionModel.getCategoriesQuestions(this._indexCategory);
     this._categoriesPageMain.destroy();
     this._categoriesPageHeader.destroy();
     this._renderQuestion();
@@ -89,7 +93,8 @@ export default class Quiz {
       this._showQuestion();
     } else {
       this._popupAnswer.destroy();
-      this._popupEndOfCategory = new PopupEndOfCategory(8);
+      const countRightAnswer = this._questionModel.getCheckAnswerForCategory()[this._indexCategory]['count'];
+      this._popupEndOfCategory = new PopupEndOfCategory(countRightAnswer);
       renderPopup(this._popupEndOfCategory, body);
       this._popupEndOfCategory.endOfCategory(this._endOfCategoryHandler);
     }

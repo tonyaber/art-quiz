@@ -4,15 +4,25 @@ export default class QuestionModel{
     this._categories = [];
     this._type = '';
     this._indexCategory = 0;
-    this._answers = {};
+    this._answers = {
+      'artists': {},
+      'pictures':{}
+    };
+    this._checkAnswerForCategory = {
+      'artists': {},
+      'pictures': {}
+    };
+    this._answerForCategory = {};
     this._getAllQuestions();
     this._createAnswer();
   }
 
   _createAnswer() {
-    new Array(24).fill(null).map((item, index) => item = index).forEach(item => {
-      this._answers[item] = {};
-    });
+    for (let key in this._answers) {
+      new Array(12).fill(null).map((item, index) => item = index).forEach(item => {
+        this._answers[key][item] = {'isPlay':false};
+      });
+    }
   }
 
   _getAllQuestions(){
@@ -21,6 +31,7 @@ export default class QuestionModel{
       .then((questions)=>this._allQuestions=questions)
   }
 
+ 
   getAllQuestions() {
     return this._allQuestions;
   }
@@ -39,19 +50,42 @@ export default class QuestionModel{
   }
 
   getCategoriesQuestions(index) {
+    this._indexCategory = index
     switch (this._type) {
       case 'artists':
-        this._indexCategory = index;
+        index=index;
         break;
       default:
-        this._indexCategory = index + 12;
+        index += 12;
         break;
     }
-    return this._allQuestions.slice(this._indexCategory * 10, this._indexCategory * 10 + 10)
+    return this._allQuestions.slice(index* 10,index * 10 + 10)
   }
 
   setCheckAnswer(index, check) {
-    this._answers[this._indexCategory][index] = check;
+    this._answers[this._type][this._indexCategory][index] = check;
+    this._answers[this._type][this._indexCategory]['isPlay'] = true;
+  }
+  
+  getCheckAnswer(index = this._indexCategory) {
+    return this._answers[index];
   }
 
+  getCheckAnswerForCategory() {
+    for (let key of Object.entries(this._answers[this._type])) {
+      if (!key[1]['isPlay']) {
+        this._checkAnswerForCategory[this._type][key[0]] = {
+          'isPlay': false,
+          'count': 0
+        }
+      } else {
+        const count = Object.values(key[1]).filter(item => item).length - 1;
+        this._checkAnswerForCategory[this._type][key[0]] = {
+          'isPlay': true,
+          'count': count
+        }
+      }
+    }
+    return this._checkAnswerForCategory[this._type];
+  }
 }

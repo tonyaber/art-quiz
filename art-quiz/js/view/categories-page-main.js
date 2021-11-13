@@ -1,13 +1,18 @@
 import Abstract from "./abstract.js";
-const createCategoriesPageMain = (questions) => {
-  const createItemTemplate = (i) => {
-    return `<div class="categories_item">
-      <h3>${i+1}</h3>
-      <img src="assets/img/paintings/${questions[i*10].imageNum}.jpg">
-      <span>9/10</span>
+const createCategoriesPageMain = (questions, answers) => {
+  const createItemTemplate = (index) => {
+    const templateCount = answers[index]['isPlay'] ? answers[index]['count'] + '/10' : '';
+    return `<div class="categories_item ${answers[index]['isPlay']?'passed':''}">
+      <h3>${index+1}</h3>
+      <img src="assets/img/paintings/${questions[index*10].imageNum}.jpg">
+      <span>${templateCount}</span>
+      <button>Score</button>
+      
     </div>`
   }
-  const template = new Array(12).fill(null).map((item, index) => item = createItemTemplate(index)).join('');
+
+
+  const templateCategories = new Array(12).fill(null).map((item, index) => item = createItemTemplate(index)).join('');
 
   return `<div class="categories_main">
     <div class="categories_top">
@@ -16,7 +21,7 @@ const createCategoriesPageMain = (questions) => {
       <button class="categories_settings">Settings</button>
     </div>
     <div class="categories_list">
-      ${template}
+      ${templateCategories}
     </div>
   </div>`
 }
@@ -25,6 +30,8 @@ export default class CategoriesPageMain extends Abstract{
   constructor(questions) {
     super();
     this._questions = questions;
+    this._answers;
+    this._type;
     this._categoriesChangeHandler = this._categoriesChangeHandler.bind(this);
     this._categoriesBackToMainHandler = this._categoriesBackToMainHandler.bind(this);
   }
@@ -32,9 +39,13 @@ export default class CategoriesPageMain extends Abstract{
   setQuestion(questions) {
     this._questions = questions;    
   }
+
+  setAnswers(answers) {
+    this._answers = answers;
+  }
   
   getTemplate() {    
-    return createCategoriesPageMain(this._questions);
+    return createCategoriesPageMain(this._questions, this._answers);
   }
 
   _categoriesChangeHandler(index) {

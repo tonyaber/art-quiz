@@ -1,9 +1,9 @@
 import Abstract from "./abstract.js";
-const createPopup = () => {
+const createPopup = (count) => {
   return `<div class="popup">
     <div class="modal_result">
       <span>Result</span>
-      <span>9/10</span>
+      <span>${count}/10</span>
       <img src="./assets/svg/end_category.svg" alt="result">
       <button>Next quiz</button>
     </div>`
