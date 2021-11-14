@@ -4,7 +4,7 @@ const createPopup = (question, check) => {
   return `<div class="popup">
       <div class="modal_answer">
         <img class="check" src="./assets/svg/${check?'correct_answer':'wrong_answer'}.svg" alt="check">
-        <img class="painting" src="./assets/img/paintings/${question.imageNum}.jpg" alt="answer">
+        <img class="painting" src="https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings/${question.imageNum}.jpg" alt="answer">
         <div class="answer">
           <span>${question.name}</span>
           <span>${question.author}</span>

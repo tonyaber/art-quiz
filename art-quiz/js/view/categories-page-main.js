@@ -4,7 +4,7 @@ const createCategoriesPageMain = (questions, answers) => {
     const templateCount = answers[index]['isPlay'] ? answers[index]['count'] + '/10' : '';
     return `<div class="categories_item ${answers[index]['isPlay']?'passed':''}">
       <h3>${index+1}</h3>
-      <img src="assets/img/paintings/${questions[index*10].imageNum}.jpg">
+      <img src="https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings/${questions[index*10].imageNum}.jpg">
       <span>${templateCount}</span>
       <button>Score</button>
       
@@ -66,6 +66,10 @@ export default class CategoriesPageMain extends Abstract{
   backToMain(callback) {
     this._callback.backToMain = callback;
     this.getElement().querySelector('.categories_home').addEventListener('click', this._categoriesBackToMainHandler);
+  }
 
+  showResult(callback) {
+    this._callback.showResult = callback;
+    this.getElement().querySelector('.categories_item button').forEach((item))
   }
 }

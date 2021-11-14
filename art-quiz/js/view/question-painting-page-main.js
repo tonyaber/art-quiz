@@ -16,7 +16,7 @@ const createQuestionPaintingPageMain = (question, allQuestions) => {
 
   return `<div class="question_main">
     <div class="question_painting_image">
-      <img src="./assets/img/paintings_full/${question.imageNum}full.jpg">
+      <img src="https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings_full/${question.imageNum}full.jpg">
       <ul>
         <li></li>
         <li></li>
