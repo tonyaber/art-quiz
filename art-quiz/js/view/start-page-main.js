@@ -21,9 +21,9 @@ export default class StartPageMain extends Abstract {
     super();
     this._typeClickHandler = this._typeClickHandler.bind(this);
   }
+  
   getTemplate() {
-    return createStartPageMain();
-    
+    return createStartPageMain();    
   }
 
   _typeClickHandler(evt) {

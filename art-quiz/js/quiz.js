@@ -1,4 +1,4 @@
-import { renderElement, renderPopup } from './utils.js';
+import { renderElement } from './utils.js';
 import StartPageHeader from "./view/start-page-header.js";
 import StartPageMain from "./view/start-page-main.js";
 import CategoriesPageMain from "./view/categories-page-main.js";
@@ -8,6 +8,7 @@ import QuestionPaintingHeader from './view/question-painting-page-header.js';
 import QuestionModel from './question-model.js';
 import PopupAnswer from './view/popup-answer.js';
 import PopupEndOfCategory from './view/popup-end-of-category.js';
+import ScorePage from './view/score-page.js';
 
 const body = document.querySelector('body');
 const header = body.querySelector('header');
@@ -29,6 +30,9 @@ export default class Quiz {
     this._nextImageHandler = this._nextImageHandler.bind(this);
     this._backToMainHandler = this._backToMainHandler.bind(this);
     this._endOfCategoryHandler = this._endOfCategoryHandler.bind(this);
+    this._showResultHandler = this._showResultHandler.bind(this);
+    this._backToMainFromScoreHandler = this._backToMainFromScoreHandler.bind(this);
+    this._backToCategoryHandler = this._backToCategoryHandler.bind(this);
   }
 
   init() {
@@ -54,6 +58,7 @@ export default class Quiz {
     
     this._categoriesPageMain.setCategories(this._categoriesChangeHandler);
     this._categoriesPageMain.backToMain(this._backToMainHandler);
+    this._categoriesPageMain.showResult(this._showResultHandler);
   }
 
   _renderPageAfterGame() {
@@ -95,7 +100,7 @@ export default class Quiz {
       this._popupAnswer.destroy();
       const countRightAnswer = this._questionModel.getCheckAnswerForCategory()[this._indexCategory]['count'];
       this._popupEndOfCategory = new PopupEndOfCategory(countRightAnswer);
-      renderPopup(this._popupEndOfCategory, body);
+      renderElement(this._popupEndOfCategory, body);
       this._popupEndOfCategory.endOfCategory(this._endOfCategoryHandler);
     }
   }
@@ -109,7 +114,8 @@ export default class Quiz {
 
   _showQuestion() {   
     this._question = this._categoriesQuestions[this._indexQuestion];
-    this._questionPainingMain = new QuestionPaintingMain(this._question, this._allQuestions);
+    const answers = this._questionModel.getCheckAnswer(this._indexCategory);
+    this._questionPainingMain = new QuestionPaintingMain(this._question, this._allQuestions, answers, this._indexQuestion);
     renderElement(this._questionPainingMain, main);
     this._questionPainingMain.checkAnswer(this._checkAnswerHandler)
   }
@@ -131,6 +137,30 @@ export default class Quiz {
     }
     this._questionModel.setCheckAnswer(this._indexQuestion, check)
     this._popupAnswer.nextImage(this._nextImageHandler)
-    renderPopup(this._popupAnswer, body);
+    renderElement(this._popupAnswer, body);
+  }
+
+  _backToMainFromScoreHandler() {
+    this._scorePage.destroy();
+    this._categoriesPageHeader.destroy();
+    this._renderStartPage();
+  }
+
+  _backToCategoryHandler() {
+    this._scorePage.destroy();
+    this._renderCategoriesPage();
+  }
+
+  _showResultHandler(index) {
+    this._categoriesPageMain.destroy();
+    let questions = this._questionModel.getCategoriesQuestions(index);
+    let answers = this._questionModel.getCheckAnswer(index);  
+
+    this._scorePage = new ScorePage(questions, answers);
+    this._scorePage.backToMain(this._backToMainFromScoreHandler);
+    this._scorePage.backToCategory(this._backToCategoryHandler);
+
+    renderElement(this._scorePage, main);
+
   }
 }

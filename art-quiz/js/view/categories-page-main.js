@@ -2,16 +2,14 @@ import Abstract from "./abstract.js";
 const createCategoriesPageMain = (questions, answers) => {
   const createItemTemplate = (index) => {
     const templateCount = answers[index]['isPlay'] ? answers[index]['count'] + '/10' : '';
-    return `<div class="categories_item ${answers[index]['isPlay']?'passed':''}">
+    return `<div class="categories_item ${answers[index]['isPlay'] ? 'passed' :''}">
       <h3>${index+1}</h3>
-      <img src="https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings/${questions[index*10].imageNum}.jpg">
+      <img src="https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings/${questions[index*10].imageNum}.jpg" alt="category image">
       <span>${templateCount}</span>
       <button>Score</button>
-      
     </div>`
   }
-
-
+  
   const templateCategories = new Array(12).fill(null).map((item, index) => item = createItemTemplate(index)).join('');
 
   return `<div class="categories_main">
@@ -34,6 +32,7 @@ export default class CategoriesPageMain extends Abstract{
     this._type;
     this._categoriesChangeHandler = this._categoriesChangeHandler.bind(this);
     this._categoriesBackToMainHandler = this._categoriesBackToMainHandler.bind(this);
+    this._showResultHandler = this._showResultHandler.bind(this);
   }
 
   setQuestion(questions) {
@@ -63,6 +62,11 @@ export default class CategoriesPageMain extends Abstract{
     this._callback.backToMain()
   }
 
+  _showResultHandler(evt, index) {
+    evt.stopPropagation()
+    this._callback.showResult(index);
+  }
+
   backToMain(callback) {
     this._callback.backToMain = callback;
     this.getElement().querySelector('.categories_home').addEventListener('click', this._categoriesBackToMainHandler);
@@ -70,6 +74,8 @@ export default class CategoriesPageMain extends Abstract{
 
   showResult(callback) {
     this._callback.showResult = callback;
-    this.getElement().querySelector('.categories_item button').forEach((item))
+    this.getElement().querySelectorAll('.categories_item button').forEach((item, index) => {
+      item.addEventListener('click', (evt) => this._showResultHandler(evt, index));
+    })
   }
 }

@@ -23,10 +23,7 @@ export default class PopupAnswer extends Abstract {
     this._nextImageHandler = this._nextImageHandler.bind(this);
   }
 
-  destroy() {
-    this.getElement().remove();
-    this._element = null;
-  }
+ 
   
   getTemplate() {
     return createPopup(this._question, this._check);

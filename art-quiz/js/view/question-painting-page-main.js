@@ -1,6 +1,6 @@
 import Abstract from "./abstract.js";
 
-const createQuestionPaintingPageMain = (question, allQuestions) => {
+const createQuestionPaintingPageMain = (question, allQuestions, answers, countAnswers) => {
   const uniqueAuthors = [...new Set(allQuestions.map(item => item.author))]
   
   const wrongAuthors = uniqueAuthors.filter(item => item != question.author)
@@ -13,21 +13,19 @@ const createQuestionPaintingPageMain = (question, allQuestions) => {
     return allAuthors.map(item => item = `<li>${item}</li>`)
       .join('');
   }
+  const createAnswersTemplate = (check) => {
+    return `<li class="${check?'true':'false'}"></li>`
+  }
+
+  const answersTemplate = new Array(10).fill(null)
+    .map((item, index) => item = (index < countAnswers) ? createAnswersTemplate(answers[index]) : '<li></li>')
+    .join('');
 
   return `<div class="question_main">
     <div class="question_painting_image">
       <img src="https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings_full/${question.imageNum}full.jpg">
       <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        ${answersTemplate}
       </ul>
     </div>
     <div class="question_painting_answers">
@@ -39,20 +37,17 @@ const createQuestionPaintingPageMain = (question, allQuestions) => {
 }
 
 export default class QuestionPaintingMain extends Abstract {
-  constructor(question, allQuestions) {
+  constructor(question, allQuestions,answers, index) {
     super();
     this._question = question;
     this._allQuestions = allQuestions;
+    this._answers = answers;
+    this._index = index;
     this._checkAnswerHandler = this._checkAnswerHandler.bind(this)
   }
 
-  setQuestion(question) {
-    this._question = question;
-    console.log(this._question)
-  }
-
   getTemplate() {
-    return createQuestionPaintingPageMain(this._question, this._allQuestions)
+    return createQuestionPaintingPageMain(this._question, this._allQuestions, this._answers, this._index)
   }
   
   _checkAnswerHandler(evt) {

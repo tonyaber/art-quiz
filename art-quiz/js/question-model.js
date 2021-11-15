@@ -20,7 +20,10 @@ export default class QuestionModel{
   _createAnswer() {
     for (let key in this._answers) {
       new Array(12).fill(null).map((item, index) => item = index).forEach(item => {
-        this._answers[key][item] = {'isPlay':false};
+        this._answers[key][item] = { 'isPlay': false };
+        for (let i = 0; i < 10; i++){
+          this._answers[key][item][i] = false;
+        }
       });
     }
   }
@@ -67,8 +70,8 @@ export default class QuestionModel{
     this._answers[this._type][this._indexCategory]['isPlay'] = true;
   }
   
-  getCheckAnswer(index = this._indexCategory) {
-    return this._answers[index];
+  getCheckAnswer(index) {
+    return this._answers[this._type][index];
   }
 
   getCheckAnswerForCategory() {

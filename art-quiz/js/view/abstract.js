@@ -13,11 +13,11 @@ export default class Abstract {
   }
 
   destroy() {
-    this._element.classList.remove('show');
+    this._element.classList.remove('show')
     this._element.classList.add('hide');
-    setTimeout(() => {
+    this._element.onanimationend = () => {
       this.getElement().remove();
       this._element = null;
-    }, 500);    
+    }
   }
 }
