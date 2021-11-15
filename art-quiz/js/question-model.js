@@ -29,7 +29,7 @@ export default class QuestionModel{
   }
 
   _getAllQuestions(){
-    fetch('./js/data.json')
+    fetch('./data/data.json')
       .then((json) => json.json())
       .then((questions)=>this._allQuestions=questions)
   }

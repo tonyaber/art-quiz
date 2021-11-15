@@ -2,7 +2,7 @@ import Abstract from "./abstract.js";
 
 const createQuestionPaintingPageMain = (question, allQuestions, answers, countAnswers) => {
   const uniqueAuthors = [...new Set(allQuestions.map(item => item.author))]
-  
+
   const wrongAuthors = uniqueAuthors.filter(item => item != question.author)
     .sort(() => Math.random() - 0.5).slice(0, 3);
   wrongAuthors.push(question.author);

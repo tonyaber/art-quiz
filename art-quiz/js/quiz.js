@@ -9,6 +9,8 @@ import QuestionModel from './question-model.js';
 import PopupAnswer from './view/popup-answer.js';
 import PopupEndOfCategory from './view/popup-end-of-category.js';
 import ScorePage from './view/score-page.js';
+import QuestionArtistsHeader from './view/question-artists-page-header.js';
+import QuestionArtistsMain from './view/question-artists-page-main.js';
 
 const body = document.querySelector('body');
 const header = body.querySelector('header');
@@ -66,6 +68,31 @@ export default class Quiz {
     renderElement(this._categoriesPageMain, main);
   }
 
+  _renderQuestion() {
+    this._allQuestions = this._questionModel.getAllQuestions();
+    this._showQuestion();
+  }
+
+  _showQuestion() {   
+    this._question = this._categoriesQuestions[this._indexQuestion];
+    const answers = this._questionModel.getCheckAnswer(this._indexCategory);
+    switch (this._type) {
+      case 'artists':
+        this._questionPainingHeader = new QuestionPaintingHeader();
+        this._questionPainingMain = new QuestionPaintingMain(this._question, this._allQuestions, answers, this._indexQuestion);
+        break;
+      default:
+        this._questionPainingHeader = new QuestionArtistsHeader(this._question);
+        this._questionPainingMain = new QuestionArtistsMain(this._question, this._allQuestions, answers, this._indexQuestion);
+    }
+    
+    renderElement(this._questionPainingHeader, header);
+    renderElement(this._questionPainingMain, main);
+    this._questionPainingMain.checkAnswer(this._checkAnswerHandler)
+  }
+
+  
+
   _typeChangeHandler(type) {
     this._startPageHeader.destroy();
     this._startPageMain.destroy();
@@ -93,6 +120,7 @@ export default class Quiz {
   _nextImageHandler() {
     if (this._indexQuestion < 9) {
       this._popupAnswer.destroy();
+      this._questionPainingHeader.destroy();
       this._questionPainingMain.destroy();
       this._indexQuestion++;
       this._showQuestion();
@@ -112,23 +140,9 @@ export default class Quiz {
     this._renderCategoriesPage()
   }
 
-  _showQuestion() {   
-    this._question = this._categoriesQuestions[this._indexQuestion];
-    const answers = this._questionModel.getCheckAnswer(this._indexCategory);
-    this._questionPainingMain = new QuestionPaintingMain(this._question, this._allQuestions, answers, this._indexQuestion);
-    renderElement(this._questionPainingMain, main);
-    this._questionPainingMain.checkAnswer(this._checkAnswerHandler)
-  }
-
-  _renderQuestion() {
-    this._allQuestions = this._questionModel.getAllQuestions();
-    this._questionPainingHeader = new QuestionPaintingHeader();    
-    renderElement(this._questionPainingHeader, header);
-    this._showQuestion();
-  }
-
   _checkAnswerHandler(answer) {
-    const check = answer == this._question.author
+    const check = (this._type == 'artists') ? answer == this._question.author : answer == this._question.imageNum;
+
     if (check) {
       this._popupAnswer = new PopupAnswer(this._question, true);
       
@@ -161,6 +175,5 @@ export default class Quiz {
     this._scorePage.backToCategory(this._backToCategoryHandler);
 
     renderElement(this._scorePage, main);
-
   }
 }
