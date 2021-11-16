@@ -10,6 +10,19 @@ const renderElement = (element, container) => {
 
 };
 
+
+const renderPopup = (element, container) => {
+
+  element = element.getElement();
+
+  element.classList.add('pages');
+  requestAnimationFrame(() => {
+    element.querySelector('.modal').classList.add('modal-show')
+  });
+  
+  container.append(element);
+}
+
 const createElement = (template) => {
   const newElement = document.createElement('div');  
   newElement.innerHTML = template;
@@ -19,4 +32,4 @@ const createElement = (template) => {
 
 
 
-export { renderElement, createElement };
+export { renderElement, createElement, renderPopup };

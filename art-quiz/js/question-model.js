@@ -15,17 +15,22 @@ export default class QuestionModel{
     this._answerForCategory = {};
     this._getAllQuestions();
     this._createAnswer();
+    this._saveAnswers();
   }
 
   _createAnswer() {
-    for (let key in this._answers) {
-      new Array(12).fill(null).map((item, index) => item = index).forEach(item => {
-        this._answers[key][item] = { 'isPlay': false };
-        for (let i = 0; i < 10; i++){
-          this._answers[key][item][i] = false;
-        }
-      });
-    }
+    if (localStorage.getItem('tonyaber-answers')) {
+      this._answers = JSON.parse(localStorage.getItem('tonyaber-answers'));
+    } else {
+      for (let key in this._answers) {
+        new Array(12).fill(null).map((item, index) => item = index).forEach(item => {
+          this._answers[key][item] = { 'isPlay': false };
+          for (let i = 0; i < 10; i++){
+            this._answers[key][item][i] = false;
+          }
+        });
+      }
+    }    
   }
 
   _getAllQuestions(){
@@ -90,5 +95,10 @@ export default class QuestionModel{
       }
     }
     return this._checkAnswerForCategory[this._type];
+  }
+  _saveAnswers() {
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('tonyaber-answers', JSON.stringify(this._answers));
+    });
   }
 }

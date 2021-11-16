@@ -2,7 +2,7 @@ import Abstract from "./abstract.js"
 
 const createPopup = (question, check) => {
   return `<div class="popup">
-      <div class="modal_answer">
+      <div class="modal_answer modal">
         <img class="check" src="./assets/svg/${check?'correct_answer':'wrong_answer'}.svg" alt="check">
         <img class="painting" src="https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings/${question.imageNum}.jpg" alt="answer">
         <div class="answer">

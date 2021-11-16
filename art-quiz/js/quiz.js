@@ -1,4 +1,4 @@
-import { renderElement } from './utils.js';
+import { renderElement, renderPopup} from './utils.js';
 import StartPageHeader from "./view/start-page-header.js";
 import StartPageMain from "./view/start-page-main.js";
 import CategoriesPageMain from "./view/categories-page-main.js";
@@ -119,22 +119,22 @@ export default class Quiz {
 
   _nextImageHandler() {
     if (this._indexQuestion < 9) {
-      this._popupAnswer.destroy();
+      this._popupAnswer.destroyPopup();
       this._questionPainingHeader.destroy();
       this._questionPainingMain.destroy();
       this._indexQuestion++;
       this._showQuestion();
     } else {
-      this._popupAnswer.destroy();
+      this._popupAnswer.destroyPopup();
       const countRightAnswer = this._questionModel.getCheckAnswerForCategory()[this._indexCategory]['count'];
       this._popupEndOfCategory = new PopupEndOfCategory(countRightAnswer);
-      renderElement(this._popupEndOfCategory, body);
+      renderPopup(this._popupEndOfCategory, body);
       this._popupEndOfCategory.endOfCategory(this._endOfCategoryHandler);
     }
   }
 
   _endOfCategoryHandler() {
-    this._popupEndOfCategory.destroy();
+    this._popupEndOfCategory.destroyPopup();
     this._questionPainingMain.destroy();
     this._questionPainingHeader.destroy()
     this._renderCategoriesPage()
@@ -151,7 +151,7 @@ export default class Quiz {
     }
     this._questionModel.setCheckAnswer(this._indexQuestion, check)
     this._popupAnswer.nextImage(this._nextImageHandler)
-    renderElement(this._popupAnswer, body);
+    renderPopup(this._popupAnswer, body);
   }
 
   _backToMainFromScoreHandler() {

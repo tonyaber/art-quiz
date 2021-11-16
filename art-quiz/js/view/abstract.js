@@ -20,4 +20,12 @@ export default class Abstract {
       this._element = null;
     }
   }
+  destroyPopup() {
+    this._element.querySelector('.modal').classList.remove('modal-show')
+    this._element.querySelector('.modal').classList.add('modal-hide');
+    this._element.onanimationend = () => {
+      this.getElement().remove();
+      this._element = null;
+    }
+  }
 }

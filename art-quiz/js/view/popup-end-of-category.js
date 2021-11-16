@@ -2,7 +2,7 @@ import Abstract from "./abstract.js";
 const createPopup = (count) => {
   const imageTemplate = count > 8 ? "./assets/img/bravo.jpg" : "./assets/img/try_again.jpg";
   return `<div class="popup">
-    <div class="modal_result">
+    <div class="modal_result modal">
       <span>Result</span>
       <span>${count}/10</span>
       <img src=${imageTemplate} alt="result">

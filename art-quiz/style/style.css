@@ -40,6 +40,19 @@ main{
   animation-duration: 0.5s;
   animation-name: page-show; 
 }
+.modal {
+  position: absolute;
+  left: calc(50% - 291px);
+}
+.modal-show {
+  animation-duration: 0.5s;
+  animation-name: modal-show; 
+}
+
+.modal-hide {
+  animation-duration: 0.5s;
+  animation-name: modal-hide; 
+}
 
 @keyframes page-show {
   0% {
@@ -62,6 +75,32 @@ main{
     opacity: 0; 
   }
 }
+@keyframes modal-show {
+  0% {
+    top:-100%;
+  }
+  80% {
+    top: 25%;
+  }
+  100%{
+    top: 20%;
+  }
+}
+@keyframes modal-hide {
+  0% {
+    top:20%;
+  }
+  20% {
+    top: 25%;
+  }
+  40% {
+    top: 20%;
+  }
+  100% {
+    top: -100%;
+  }
+}
+
 
 header {
   box-sizing: border-box;
