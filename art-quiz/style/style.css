@@ -130,8 +130,12 @@ header img {
     font: inherit;
     color: inherit;
     background-color: transparent;
+    transition: all 0.5s;
 }
-
+.start_page_type button:hover{
+  transform: scale(1.05);
+  transition: all 0.5s;
+}
 .start_page_type {
   display: flex;
   justify-content: space-between;
@@ -204,10 +208,13 @@ header img {
   text-transform: uppercase;
   font-size: 18px;
   line-height: 22px;
-
+  transition: all 0.5s;
 }
 
-
+.categories_top button:hover{
+  transform: scale(1.05);
+  transition: all 0.5s;
+}
 
 .categories_home {
   background-image: url("../assets/svg/home.svg");
@@ -233,6 +240,12 @@ header img {
   position: relative;
   padding:0;
   background-color: rgba(255, 255, 255, 0.5);
+  transition: all 0.5s;
+}
+
+.categories_item:hover{
+  transform: scale(1.05);
+  transition: all 0.5s;
 }
 
 .categories_item h3 {
@@ -425,6 +438,12 @@ header img {
   background-color: #660033;
 }
 
+.question_painting_answers li:hover{
+  font-weight: bold;
+  background-color:#C4C4C4;
+  transition: all 0.5s;
+}
+
 .popup {
   position: absolute;
   padding-top: 200px;
@@ -477,6 +496,11 @@ header img {
   text-transform: uppercase;
   font-size: 18px;
   line-height: 22px;
+  transition: all 0.5s;
+}
+.answer button:hover{
+  transform: scale(1.1);
+  transition: all 0.5s;
 }
 .modal_result { 
   margin: 0 auto;
@@ -514,6 +538,12 @@ header img {
   text-transform: uppercase;
   font-size: 18px;
   line-height: 22px;
+  transition: all 0.5s;
+}
+
+.modal_result button{
+  transform: scale(1.1);
+  transition: all 0.5s;
 }
 
 .score-top {
@@ -541,7 +571,12 @@ header img {
   text-transform: uppercase;
   font-size: 18px;
   line-height: 22px;
+  transition: all 0.5s;
+}
 
+.score-top button:hover{
+  transform: scale(1.05);
+  transition: all 0.5s;
 }
 .score_home {
   background-image: url("../assets/svg/home.svg");
@@ -638,7 +673,14 @@ header img {
 .question li img {
   width: 100%;
   border-radius: 10px;
+  transition: all 0.5s;
 }
+
+.question li img:hover{
+  transform: scale(1.05);
+  transition: all 0.5s;
+}
+
 .answers {
   position: absolute;
   bottom: -25px;
