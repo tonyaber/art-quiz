@@ -36,7 +36,9 @@ export default class Quiz {
     this._showResultHandler = this._showResultHandler.bind(this);
     this._backToMainFromScoreHandler = this._backToMainFromScoreHandler.bind(this);
     this._backToCategoryHandler = this._backToCategoryHandler.bind(this);
-    this._showSettingHandlerMain = this._showSettingHandlerMain.bind(this)
+    this._showSettingHandlerMain = this._showSettingHandlerMain.bind(this);
+    this._showSettingHandlerCategory = this._showSettingHandlerCategory.bind(this);
+    this._saveSettingHandler = this._saveSettingHandler.bind(this);
   }
 
   init() {
@@ -64,6 +66,7 @@ export default class Quiz {
     this._categoriesPageMain.setCategories(this._categoriesChangeHandler);
     this._categoriesPageMain.backToMain(this._backToMainHandler);
     this._categoriesPageMain.showResult(this._showResultHandler);
+    this._categoriesPageMain.showSetting(this._showSettingHandlerCategory);
   }
 
   _renderPageAfterGame() {
@@ -183,6 +186,19 @@ export default class Quiz {
   _showSettingHandlerMain() {
     this._startPageMain.destroy();
     this._settingPage = new SettingPage();
-    renderElement(this._settingPage, main)
+    this._settingPage.saveSetting(this._saveSettingHandler);
+    renderElement(this._settingPage, main);
+  }
+
+  _showSettingHandlerCategory() {
+    this._categoriesPageMain.destroy();
+    this._settingPage = new SettingPage();
+    this._settingPage.saveSetting(this._saveSettingHandler);
+    renderElement(this._settingPage, main);
+  }
+
+  _saveSettingHandler() {
+    this._settingPage.destroy();
+    this._renderStartPage();
   }
 }

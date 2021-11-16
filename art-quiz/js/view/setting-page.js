@@ -38,9 +38,20 @@ const createSetting = () => {
 
 export default class SettingPage extends Abstract {
   constructor() {
-    super()
+    super();
+    this._saveSettingHandler = this._saveSettingHandler.bind(this);
   }
   getTemplate() {
     return createSetting();
+  }
+
+  _saveSettingHandler(evt) {
+    evt.preventDefault();
+    this._callback.saveSetting();
+  }
+
+  saveSetting(callback) {
+    this._callback.saveSetting = callback;
+    this.getElement().querySelector('button').addEventListener('click', this._saveSettingHandler);
   }
 }

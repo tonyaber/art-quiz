@@ -33,6 +33,7 @@ export default class CategoriesPageMain extends Abstract{
     this._categoriesChangeHandler = this._categoriesChangeHandler.bind(this);
     this._categoriesBackToMainHandler = this._categoriesBackToMainHandler.bind(this);
     this._showResultHandler = this._showResultHandler.bind(this);
+    this._showSettingHandler = this._showSettingHandler.bind(this);
   }
 
   setQuestion(questions) {
@@ -67,6 +68,12 @@ export default class CategoriesPageMain extends Abstract{
     this._callback.showResult(index);
   }
 
+  _showSettingHandler(evt) {
+    evt.preventDefault();
+    this._callback.setting()
+  }
+
+
   backToMain(callback) {
     this._callback.backToMain = callback;
     this.getElement().querySelector('.categories_home').addEventListener('click', this._categoriesBackToMainHandler);
@@ -77,5 +84,10 @@ export default class CategoriesPageMain extends Abstract{
     this.getElement().querySelectorAll('.categories_item button').forEach((item, index) => {
       item.addEventListener('click', (evt) => this._showResultHandler(evt, index));
     })
+  }
+
+  showSetting(callback) {
+    this._callback.setting = callback;
+    this.getElement().querySelector('.categories_settings').addEventListener('click', this._showSettingHandler);
   }
 }

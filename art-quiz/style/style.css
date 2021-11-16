@@ -175,7 +175,9 @@ header img {
   line-height: 22px;
   transition: all 0.5s;
 }
-
+.start_page_setting img{
+   transition: all 2s;
+}
 .start_page_setting:hover img {
   transform: rotate(720deg);
   transition: all 5s;
@@ -237,6 +239,10 @@ header img {
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+
+.categories_top .categories_settings img{
+    transition: all 2s;
 }
 
 .categories_settings:hover img{
@@ -352,22 +358,16 @@ header img {
   line-height: 44px;
 }
 
-.question_painting_image {
+.question_painting_image{
   position: relative;
-  overflow:hidden;
-  width: 1000px;
-  height: 650px;
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
 }
 
 .question_painting_image img {
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width: 1000px;
-  height: 650px;
-  object-fit:cover;
-  
+  width: 600px;
+  height: 600px;  
 }
 
 .question_painting_image ul {
@@ -651,7 +651,7 @@ header img {
   transition: all 0.5s;
 }
 
-.score-item .answer:hover {
+.score-item:hover .answer {
   opacity: 1;
   transition: all 0.5s;
 }
