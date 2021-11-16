@@ -728,17 +728,24 @@ header img {
   color: #660033;
   text-align: center;
 }
+
 .settings-container {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 50px;
 }
+
 .settings-container > div {
   width: 40%;
   height: 250px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
+}
+
+.settings-container input,
+.settings-container select {
+  cursor: pointer;
 }
 
 .volume input[type=range],

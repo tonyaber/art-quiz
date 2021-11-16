@@ -51,10 +51,13 @@ export default class QuestionArtistsMain extends Abstract{
     this._answers = answers;
     this._index = index;
     this._checkAnswerHandler = this._checkAnswerHandler.bind(this);
+
   }
 
   getTemplate() {
+    console.log(this._answers)
     return createQuestionArtistsPageMain(this._question, this._allQuestions, this._answers, this._index);
+    
   }
 
   _checkAnswerHandler(evt) {

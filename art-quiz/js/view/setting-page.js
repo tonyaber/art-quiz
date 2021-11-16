@@ -1,15 +1,15 @@
 import Abstract from "./abstract.js";
 const createSetting = () => {
-  return ` <div class="settings-main">
+  return `<div class="settings-main">
         <h2>Settings</h2>
         <div class="settings-container">
-          <div class="volume">
+          <div class="volume sound">
             <img src="./assets/svg/sound.svg" alt="volume sound">
-            <input type="checkbox">
+            <input type="checkbox" >
             <input type="range" min="0" max="100" value="50">
             <h3>Volume</h3>
           </div>
-          <div class="music">
+          <div class="music sound">
             <img src="./assets/svg/music.svg" alt="volume music">
             <input type="checkbox">
             <input type="range" min="0" max="100" value="50">
@@ -40,6 +40,9 @@ export default class SettingPage extends Abstract {
   constructor() {
     super();
     this._saveSettingHandler = this._saveSettingHandler.bind(this);
+    this._changeInputSound();
+    this._changeInputTime();
+
   }
   getTemplate() {
     return createSetting();
@@ -54,4 +57,22 @@ export default class SettingPage extends Abstract {
     this._callback.saveSetting = callback;
     this.getElement().querySelector('button').addEventListener('click', this._saveSettingHandler);
   }
+
+  _changeInputSound() {
+    this.getElement().querySelectorAll('.sound input[type=range]').forEach(item => {
+      item.addEventListener('input', (evt) => {
+        evt.target.style.background = `linear-gradient(to right, #660033 0%, #660033 ${evt.target.value}%, #E5E5E5 ${evt.target.value}%, #E5E5E5 100%)`
+      })
+    })
+  }
+
+  _changeInputTime() {
+    this.getElement().querySelector('.time input[type=range]').addEventListener('input', (evt) => {
+      const value = (evt.target.value - 5) * 20 / 5;
+      evt.target.style.background = `linear-gradient(to right, #660033 0%, #660033 ${value}%, #E5E5E5 ${value}%, #E5E5E5 100%)`;
+    })
+  }
+
+
+
 }

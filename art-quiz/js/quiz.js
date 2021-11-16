@@ -76,6 +76,9 @@ export default class Quiz {
 
   _renderQuestion() {
     this._allQuestions = this._questionModel.getAllQuestions();
+    //вытянуть с модели все 10 вопросов и варианты ответов
+    //масив с 10 вопросов, каждый имеет 4 варианта ответа
+    //
     this._showQuestion();
   }
 
@@ -199,6 +202,7 @@ export default class Quiz {
 
   _saveSettingHandler() {
     this._settingPage.destroy();
+    //создать модель настроек, 
     this._renderStartPage();
   }
 }
