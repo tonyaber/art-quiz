@@ -1,0 +1,71 @@
+
+.start_page_header img {
+  width: 150px;
+  height: auto;
+  padding: 10px;
+}
+
+.start_page_type button {
+  position: relative;
+    padding: 0;
+    width: 415px;
+    height: 474px;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    transition: all 0.5s;
+}
+.start_page_type button:hover{
+  transform: scale(1.1) rotate(5deg);
+  transition: all 0.5s;
+}
+.start_page_type {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.artists {
+  background: url('../assets/img/artists-quiz.jpg') no-repeat;
+}
+
+.pictures {
+  background: url("../assets/img/pictures-quiz.jpg") no-repeat;
+}
+.start_page_type button span {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 36px;
+  line-height: 44px;
+  color: #660033;
+  text-transform: uppercase;
+}
+
+.start_page_setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 70px auto 0;  
+  width: 150px;
+  height: 50px;
+  background-color: #660033;
+  border: none;
+  color: #ffffff;
+  text-align: right;
+  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 22px;
+  transition: all 0.5s;
+}
+
+.start_page_setting:hover img {
+  transform: rotate(720deg);
+  transition: all 5s;
+}
+
+.start_page_setting:hover{
+  transform: scale(1.1);
+  transition: all 0.5s;
+}

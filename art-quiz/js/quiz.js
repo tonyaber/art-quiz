@@ -11,6 +11,7 @@ import PopupEndOfCategory from './view/popup-end-of-category.js';
 import ScorePage from './view/score-page.js';
 import QuestionArtistsHeader from './view/question-artists-page-header.js';
 import QuestionArtistsMain from './view/question-artists-page-main.js';
+import SettingPage from './view/setting-page.js';
 
 const body = document.querySelector('body');
 const header = body.querySelector('header');
@@ -35,6 +36,7 @@ export default class Quiz {
     this._showResultHandler = this._showResultHandler.bind(this);
     this._backToMainFromScoreHandler = this._backToMainFromScoreHandler.bind(this);
     this._backToCategoryHandler = this._backToCategoryHandler.bind(this);
+    this._showSettingHandlerMain = this._showSettingHandlerMain.bind(this)
   }
 
   init() {
@@ -50,6 +52,7 @@ export default class Quiz {
     renderElement(this._startPageHeader, header);
     renderElement(this._startPageMain, main);
     this._startPageMain.setTypeChangeHandler(this._typeChangeHandler);
+    this._startPageMain.showSetting(this._showSettingHandlerMain);
   }
 
   _renderCategoriesPage() {
@@ -175,5 +178,11 @@ export default class Quiz {
     this._scorePage.backToCategory(this._backToCategoryHandler);
 
     renderElement(this._scorePage, main);
+  }
+
+  _showSettingHandlerMain() {
+    this._startPageMain.destroy();
+    this._settingPage = new SettingPage();
+    renderElement(this._settingPage, main)
   }
 }

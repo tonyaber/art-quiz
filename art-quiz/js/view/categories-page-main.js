@@ -16,7 +16,7 @@ const createCategoriesPageMain = (questions, answers) => {
     <div class="categories_top">
       <button class="categories_home">Home</button>
       <h2>Categories</h2>
-      <button class="categories_settings">Settings</button>
+      <button class="categories_settings"><img src="./assets/svg/setting.svg">Settings</button>
     </div>
     <div class="categories_list">
       ${templateCategories}
@@ -63,7 +63,7 @@ export default class CategoriesPageMain extends Abstract{
   }
 
   _showResultHandler(evt, index) {
-    evt.stopPropagation()
+    evt.stopPropagation();
     this._callback.showResult(index);
   }
 
