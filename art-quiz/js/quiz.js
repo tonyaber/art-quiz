@@ -40,6 +40,7 @@ export default class Quiz {
     this._showSettingHandlerMain = this._showSettingHandlerMain.bind(this);
     this._showSettingHandlerCategory = this._showSettingHandlerCategory.bind(this);
     this._saveSettingHandler = this._saveSettingHandler.bind(this);
+    this._backToMainFromQuesting = this._backToMainFromQuesting.bind(this);
   }
 
   init() {
@@ -94,14 +95,13 @@ export default class Quiz {
     switch (this._type) {
       case 'artists':
         this._questionPainingHeader = new QuestionArtistsHeader();
+        this._questionPainingHeader.backToMain(this._backToMainFromQuesting);
         this._questionPainingMain = new QuestionArtistsMain(this._question, this._allQuestions, answers, this._indexQuestion);
-
-         break;
+        break;
       default:
         this._questionPainingHeader = new QuestionPaintingHeader(this._question);
+        this._questionPainingHeader.backToMain(this._backToMainFromQuesting);
         this._questionPainingMain = new QuestionPaintingMain(this._question, this._allQuestions, answers, this._indexQuestion);
-
-    
     }
     
     renderElement(this._questionPainingHeader, header);
@@ -181,6 +181,11 @@ export default class Quiz {
   _backToCategoryHandler() {
     this._scorePage.destroy();
     this._renderCategoriesPage();
+  }
+  _backToMainFromQuesting() {
+    this._questionPainingHeader.destroy();
+    this._questionPainingMain.destroy();
+    this._renderStartPage();
   }
 
   _showResultHandler(index) {

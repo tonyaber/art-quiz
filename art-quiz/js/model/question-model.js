@@ -34,7 +34,7 @@ export default class QuestionModel{
   }
 
   buildAllQuestions(){
-    fetch('./data/data.json')
+    fetch('./data/data-en.json')
       .then((json) => json.json())
       .then((questions)=>this._allQuestions=questions)
   }

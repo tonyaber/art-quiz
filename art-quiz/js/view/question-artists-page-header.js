@@ -14,7 +14,28 @@ const createQuestionArtistsPageHeader = () => {
 }
 
 export default class QuestionArtistsHeader extends Abstract {
+  constructor() {
+    super();
+    this._backToMainHandler = this._backToMainHandler.bind(this);
+  }
   getTemplate() {
     return createQuestionArtistsPageHeader(this._question, this._allQuestions);
+  }
+
+
+  _showSettingHandler(evt) {
+    evt.preventDefault();
+    this._callback.setting()
+  }
+
+  _backToMainHandler(evt) {
+    evt.preventDefault();
+    this._callback.backToMain()
+  }
+
+
+  backToMain(callback) {
+    this._callback.backToMain = callback;
+    this.getElement().querySelector('img').addEventListener('click', this._backToMainHandler);
   }
 }
