@@ -22,6 +22,10 @@ export default class SettingModel {
   getSetting(key, value) {
     return this._settings[key][value];
   }
+  
+  getAllSetting() {
+    return this._settings;
+  }
 
   getLanguage() {
     return this._settings['language'];

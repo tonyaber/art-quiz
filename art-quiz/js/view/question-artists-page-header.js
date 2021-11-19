@@ -1,13 +1,12 @@
 import Abstract from "./abstract.js";
 
-const createQuestionArtistsPageHeader = () => {
+const createQuestionArtistsPageHeader = () => { 
   return `<div class="question_header">
     <h1>ArtQuiz</h1>
     <div class="question_header_container">
       <img src="./assets/img/logo.png" alt="logo">
       <h2>Who is the author of this picture ?</h2>
-      <div class="time">
-        <span>03:59</span>
+      <div class="time">       
       </div>
     </div>
   </div>`
@@ -15,11 +14,17 @@ const createQuestionArtistsPageHeader = () => {
 
 export default class QuestionArtistsHeader extends Abstract {
   constructor() {
-    super();
+    super();    
+  
     this._backToMainHandler = this._backToMainHandler.bind(this);
   }
+
   getTemplate() {
-    return createQuestionArtistsPageHeader(this._question, this._allQuestions);
+    return createQuestionArtistsPageHeader();
+  }
+  
+  getTimeContainer() {
+    return this.getElement().querySelector('.time')
   }
 
 

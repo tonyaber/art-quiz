@@ -343,16 +343,16 @@ header img {
   text-align: center;
 }
 
-.question_header_container img {
+.question_header_container>img {
   margin: 0;
   display: inline-block;
   width: 94px;
   height: 60px;
 }
 
-.question_header_container .time {
-  padding: 10px 0 0 70px;
-  background: url("../assets/svg/timer.svg") no-repeat;
+.question_header_container .time div {
+  display: flex;
+  align-items: center;  
   font-weight: normal;
   font-size: 36px;
   line-height: 44px;

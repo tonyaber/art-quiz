@@ -13,6 +13,7 @@ import QuestionArtistsMain from './view/question-artists-page-main.js';
 import SettingPage from './view/setting-page.js';
 import SettingModel from './model/setting-model.js';
 import QuestionModel from './model/question-model.js';
+import Timer from './view/timer.js';
 
 const body = document.querySelector('body');
 const header = body.querySelector('header');
@@ -27,6 +28,7 @@ export default class Quiz {
     this._allQuestions = [];
     this._categories = [];
     this._question = {};
+    this._setting = {};
     this._categoriesQuestions = [];
     this._typeChangeHandler = this._typeChangeHandler.bind(this);
     this._categoriesChangeHandler = this._categoriesChangeHandler.bind(this);
@@ -41,6 +43,7 @@ export default class Quiz {
     this._showSettingHandlerCategory = this._showSettingHandlerCategory.bind(this);
     this._saveSettingHandler = this._saveSettingHandler.bind(this);
     this._backToMainFromQuesting = this._backToMainFromQuesting.bind(this);
+    this._setWrongAnswer = this._setWrongAnswer.bind(this)
   }
 
   init() {
@@ -51,6 +54,8 @@ export default class Quiz {
     this._categoriesPageHeader = new CategoriesPageHeader();
     this._categoriesPageMain = new CategoriesPageMain(this._categories);
     this.settingModel = new SettingModel();
+    this._questionPainingHeader = new QuestionArtistsHeader();
+    this._setting = this.settingModel.getAllSetting();
     this._renderStartPage();
 
   }
@@ -92,15 +97,18 @@ export default class Quiz {
   _showQuestion() {   
     this._question = this._categoriesQuestions[this._indexQuestion];
     const answers = this._questionModel.getCheckAnswer(this._indexCategory);
+    const timerCheck = this._setting['time']['check'];
     switch (this._type) {
       case 'artists':
         this._questionPainingHeader = new QuestionArtistsHeader();
         this._questionPainingHeader.backToMain(this._backToMainFromQuesting);
+        this._checkTimer(timerCheck);
         this._questionPainingMain = new QuestionArtistsMain(this._question, this._allQuestions, answers, this._indexQuestion);
         break;
       default:
         this._questionPainingHeader = new QuestionPaintingHeader(this._question);
         this._questionPainingHeader.backToMain(this._backToMainFromQuesting);
+        this._checkTimer(timerCheck);
         this._questionPainingMain = new QuestionPaintingMain(this._question, this._allQuestions, answers, this._indexQuestion);
     }
     
@@ -109,6 +117,18 @@ export default class Quiz {
     this._questionPainingMain.checkAnswer(this._checkAnswerHandler)
   }
 
+  _checkTimer(timerCheck) {
+    if (timerCheck) {
+      const containerTime = this._questionPainingHeader.getTimeContainer();
+      const value = this._setting['time']['value'];
+      const timer = new Timer(containerTime, value);
+      timer.endInterval(this._setWrongAnswer);
+      timer.render();
+    }
+  }
+  _setWrongAnswer() {
+    this._checkAnswerHandler(false);
+  }
   
 
   _typeChangeHandler(type) {
