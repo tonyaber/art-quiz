@@ -8,14 +8,11 @@ import SettingLanguage from "./setting-component/setting-language.js";
 const createSetting = () => {
   return `<div class="settings-main">
         <h2>Settings</h2>
-        <div class="settings-container">
-          
-
+        <div class="settings-container">      
         </div>
         <button>Save</button>
       </div>`;
 }
-
 
 export default class SettingPage extends Abstract {
   constructor(settingModel) {
@@ -23,8 +20,6 @@ export default class SettingPage extends Abstract {
     this.settingModel = settingModel;
   
     this._saveSettingHandler = this._saveSettingHandler.bind(this);
-
-    
   }
   init() {
     const container = this.getElement().querySelector('.settings-container');

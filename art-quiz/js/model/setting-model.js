@@ -24,7 +24,6 @@ export default class SettingModel {
   }
 
   getLanguage() {
-    console.log(this._settings['language']);
     return this._settings['language'];
   }
 
@@ -35,7 +34,6 @@ export default class SettingModel {
 
   setLanguage(value) {
     this._settings['language'] = value;
-    console.log(this._settings['language']);
   }
 
   _updateSettings() {

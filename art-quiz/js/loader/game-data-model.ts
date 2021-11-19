@@ -62,7 +62,6 @@ export default class GameDataModel implements IGameData {
   constructor(data: IQuestionData[], category: number) {
     const categoryQuestionsData = data.slice(category * 10, 10);
     const categoryQuestions: Array<IQuestion> = [];
-    console.log(data, category)
     for (let i = 0; i < categoryQuestionsData.length; i++) {
       const item = categoryQuestionsData[i];
      /* const variant: IAnswer = {

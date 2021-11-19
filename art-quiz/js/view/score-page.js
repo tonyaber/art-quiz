@@ -3,7 +3,6 @@ import Abstract from "./abstract.js"
 const createScorePage = (questions, answers) => {
   
   const createItemTemplate = (index) => {
-    console.log(questions[index]['imageNum'])
     return `<div class="score-item ${answers[index] ? 'check' : ''}">
             <h3>${index + 1}</h3>
             <img class="check" src="./assets/svg/${answers[index] ? 'correct_answer' : 'wrong_answer'}.svg" alt="check">

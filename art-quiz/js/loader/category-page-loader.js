@@ -1,13 +1,11 @@
 export default class CategoryPageLoader {
   constructor(data, type) {
-      console.log(data)
     const questions = [];
     this._data = data;
     this._category = type;
     this._cache = new Map();
     const categoryQuestionsData = data.slice(category * 10, 10);
     const categoryQuestions = [];
-    console.log(data, category)
     for (let i = 0; i < categoryQuestionsData.length; i++) {
       const item = categoryQuestionsData[i];
       /* const variant: IAnswer = {

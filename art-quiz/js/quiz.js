@@ -3,16 +3,16 @@ import StartPageHeader from "./view/start-page-header.js";
 import StartPageMain from "./view/start-page-main.js";
 import CategoriesPageMain from "./view/categories-page-main.js";
 import CategoriesPageHeader from './view/categories-page-header.js';
-import QuestionPaintingMain from './view/question-painting-page-main.js';
-import QuestionPaintingHeader from './view/question-painting-page-header.js';
-import QuestionModel from './question-model.js';
+import QuestionPaintingMain from './view/question-paintings-page-main.js';
+import QuestionPaintingHeader from './view/question-paintings-page-header.js';
 import PopupAnswer from './view/popup-answer.js';
 import PopupEndOfCategory from './view/popup-end-of-category.js';
 import ScorePage from './view/score-page.js';
 import QuestionArtistsHeader from './view/question-artists-page-header.js';
 import QuestionArtistsMain from './view/question-artists-page-main.js';
 import SettingPage from './view/setting-page.js';
-import SettingModel from './model/settingModel.js';
+import SettingModel from './model/setting-model.js';
+import QuestionModel from './model/question-model.js';
 
 const body = document.querySelector('body');
 const header = body.querySelector('header');
@@ -93,12 +93,15 @@ export default class Quiz {
     const answers = this._questionModel.getCheckAnswer(this._indexCategory);
     switch (this._type) {
       case 'artists':
-        this._questionPainingHeader = new QuestionPaintingHeader();
-        this._questionPainingMain = new QuestionPaintingMain(this._question, this._allQuestions, answers, this._indexQuestion);
-        break;
-      default:
-        this._questionPainingHeader = new QuestionArtistsHeader(this._question);
+        this._questionPainingHeader = new QuestionArtistsHeader();
         this._questionPainingMain = new QuestionArtistsMain(this._question, this._allQuestions, answers, this._indexQuestion);
+
+         break;
+      default:
+        this._questionPainingHeader = new QuestionPaintingHeader(this._question);
+        this._questionPainingMain = new QuestionPaintingMain(this._question, this._allQuestions, answers, this._indexQuestion);
+
+    
     }
     
     renderElement(this._questionPainingHeader, header);
