@@ -1,5 +1,6 @@
+import { LANGUAGE } from "../const.js";
 import Abstract from "./abstract.js";
-const createCategoriesPageMain = (questions, answers) => {
+const createCategoriesPageMain = (questions, answers, language) => {
   
   const createItemTemplate = (index) => {
     const templateCount = answers[index]['isPlay'] ? answers[index]['count'] + '/10' : '';
@@ -7,7 +8,7 @@ const createCategoriesPageMain = (questions, answers) => {
       <h3>${index+1}</h3>
       <img src="./assets/img/paintings/${questions[index*10].imageNum}.jpg" alt="category image">
       <span>${templateCount}</span>
-      <button>Score</button>
+      <button>${LANGUAGE[language]['score']}</button>
     </div>`
   }
   
@@ -15,9 +16,9 @@ const createCategoriesPageMain = (questions, answers) => {
 
   return `<div class="categories_main">
     <div class="categories_top">
-      <button class="categories_home">Home</button>
-      <h2>Categories</h2>
-      <button class="categories_settings"><img src="./assets/svg/setting.svg">Settings</button>
+      <button class="categories_home">${LANGUAGE[language]['home']}</button>
+      <h2>${LANGUAGE[language]['categories']}</h2>
+      <button class="categories_settings"><img src="./assets/svg/setting.svg">${LANGUAGE[language]['settings']}</button>
     </div>
     <div class="categories_list">
       ${templateCategories}
@@ -26,9 +27,10 @@ const createCategoriesPageMain = (questions, answers) => {
 }
 
 export default class CategoriesPageMain extends Abstract{
-  constructor(questions) {
+  constructor(questions, language) {
     super();
     this._questions = questions;
+    this._language = language;
     this._answers;
     this._type;
     this._photo;
@@ -48,7 +50,7 @@ export default class CategoriesPageMain extends Abstract{
 
   
   getTemplate() {
-    return createCategoriesPageMain(this._questions, this._answers);
+    return createCategoriesPageMain(this._questions, this._answers, this._language);
   }
 
   _categoriesChangeHandler(index) {

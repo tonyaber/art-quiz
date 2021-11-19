@@ -1,11 +1,13 @@
+import { LANGUAGE } from "../../const.js";
 import Control from "../control.js";
 import SettingMusicBar from "./setting-music-bar.js";
 
 
 export default class SettingMusic extends Control {
-  constructor(parentNode, settingModel) {
+  constructor(parentNode, settingModel, language) {
     super(parentNode);
     this.settingModel = settingModel;
+    this._language = language;
 
     this.check = this.settingModel.getSetting('music', 'check');
     this._value = this.settingModel.getSetting('music', 'value');
@@ -21,7 +23,7 @@ export default class SettingMusic extends Control {
 
     const musicBar = new SettingMusicBar(musicContainer.node, this.settingModel, this.check);
 
-    const musicTitle = new Control(musicContainer.node, 'h3', '', 'Music');
+    const musicTitle = new Control(musicContainer.node, 'h3', '', LANGUAGE[this._language]['music']);
 
     musicCheckBox.node.onchange = (evt) => {
       this.settingModel.setSetting('music', this._value, evt.target.checked);

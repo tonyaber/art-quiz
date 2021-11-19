@@ -1,10 +1,12 @@
+import { LANGUAGE } from "../../const.js";
 import Control from "../control.js";
 import SettingVolumeBar from "./setting-volume-bar.js";
 
 export default class SettingVolume extends Control{
-  constructor(parentNode, settingModel) {
+  constructor(parentNode, settingModel, language) {
     super(parentNode);
     this.settingModel = settingModel;
+    this._language = language;
 
     this.check = this.settingModel.getSetting('volume', 'check');
     this._value = this.settingModel.getSetting('volume', 'value');
@@ -20,7 +22,7 @@ export default class SettingVolume extends Control{
 
     const volumeBar = new SettingVolumeBar(volumeContainer.node, this.settingModel, this.check);
 
-    const volumeTitle = new Control(volumeContainer.node, 'h3', '', 'Volume');
+    const volumeTitle = new Control(volumeContainer.node, 'h3', '', LANGUAGE[this._language]['volume']);
 
     volumeCheckBox.node.onchange = (evt) => {
       this.settingModel.setSetting('volume', this._value, evt.target.checked);

@@ -21,7 +21,7 @@ export default class Timer extends Abstract{
   render() {
     this._timer = setInterval(this.setTimer, 1000);
   }
-  
+
   setTimer() {
     this.getElement().remove();
     let time = this._value >= 10 ? this._value : '0' + this._value;
@@ -29,9 +29,13 @@ export default class Timer extends Abstract{
     this._container.append(this._element);
     this._value--;
     if (this._value < 0) {
-      clearInterval(this._timer)
+      this.stopInterval()
       this._callback.endInterval();
     }
+  }
+
+  stopInterval() {
+    clearInterval(this._timer)
   }
 
   endInterval(callback) {

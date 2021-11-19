@@ -49,18 +49,20 @@ export default class Quiz {
   init() {
     this._questionModel = new QuestionModel();
     this._questionModel.buildAllQuestions();
-    this._startPageHeader = new StartPageHeader();
-    this._startPageMain = new StartPageMain();
-    this._categoriesPageHeader = new CategoriesPageHeader();
-    this._categoriesPageMain = new CategoriesPageMain(this._categories);
     this.settingModel = new SettingModel();
-    this._questionPainingHeader = new QuestionArtistsHeader();
     this._setting = this.settingModel.getAllSetting();
+    this._language = this.settingModel.getLanguage();
+
+    
+   
+    
     this._renderStartPage();
 
   }
 
-  _renderStartPage() {    
+  _renderStartPage() {
+    this._startPageHeader = new StartPageHeader();
+    this._startPageMain = new StartPageMain(this._language);
     renderElement(this._startPageHeader, header);
     renderElement(this._startPageMain, main);
     this._startPageMain.setTypeChangeHandler(this._typeChangeHandler);
@@ -68,7 +70,8 @@ export default class Quiz {
   }
 
   _renderCategoriesPage() {
-    
+    this._categoriesPageHeader = new CategoriesPageHeader();
+    this._categoriesPageMain = new CategoriesPageMain(this._categories, this._language);    
     this._categoriesPageMain.setQuestion(this._categories);
     this._categoriesPageMain.setAnswers(this._questionModel.getCheckAnswerForCategory());
     renderElement(this._categoriesPageHeader, header);
@@ -121,9 +124,9 @@ export default class Quiz {
     if (timerCheck) {
       const containerTime = this._questionPainingHeader.getTimeContainer();
       const value = this._setting['time']['value'];
-      const timer = new Timer(containerTime, value);
-      timer.endInterval(this._setWrongAnswer);
-      timer.render();
+      this._timer = new Timer(containerTime, value);
+      this._timer.endInterval(this._setWrongAnswer);
+      this._timer.render();
     }
   }
   _setWrongAnswer() {
@@ -179,6 +182,10 @@ export default class Quiz {
   }
 
   _checkAnswerHandler(answer) {
+    if (this._timer) {
+      this._timer.stopInterval();
+    }
+   
     const check = (this._type == 'artists') ? answer == this._question.author : answer == this._question.imageNum;
 
     if (check) {
@@ -203,6 +210,9 @@ export default class Quiz {
     this._renderCategoriesPage();
   }
   _backToMainFromQuesting() {
+    if (this._timer) {
+      this._timer.stopInterval();
+    }    
     this._questionPainingHeader.destroy();
     this._questionPainingMain.destroy();
     this._renderStartPage();
@@ -223,22 +233,27 @@ export default class Quiz {
   _showSettingHandlerMain() {
     this._startPageMain.destroy();
     
-    this._settingPage = new SettingPage(this.settingModel);
+    this._settingPage = new SettingPage(this.settingModel, this._language);
     this._settingPage.init();
     this._settingPage.saveSetting(this._saveSettingHandler);
     renderElement(this._settingPage, main);
   }
 
   _showSettingHandlerCategory() {
+    this._categoriesPageHeader.destroy();
     this._categoriesPageMain.destroy();
-    this._settingPage = new SettingPage();
+    this._settingPage = new SettingPage(this.settingModel, this._language);
+    this._settingPage.init();
     this._settingPage.saveSetting(this._saveSettingHandler);
+    renderElement(this._startPageHeader, header);
     renderElement(this._settingPage, main);
   }
 
   _saveSettingHandler() {
+    this._startPageHeader.destroy();
     this._settingPage.destroy();
-    //создать модель настроек, 
+    this._setting = this.settingModel.getAllSetting();
+    this._language = this.settingModel.getLanguage();
     this._renderStartPage();
   }
 }
