@@ -7,23 +7,21 @@ export default class SettingTime extends Control {
     super(parentNode);
     this.settingModel = settingModel;
 
-    this._check = this.settingModel.getSetting('time', 'check');
+    this.check = this.settingModel.getSetting('time', 'check');
     this._value = this.settingModel.getSetting('time', 'value');
 
-    const timeContainer = new Control(this.node, 'div', 'time sound', '');
+    const timeContainer = new Control(this.node, 'div', 'time', '');
     const timeIcon = new Control(timeContainer.node, 'img', '', '');
     timeIcon.node.src = "./assets/svg/clock.svg";
-    timeIcon.node.alt = "time icon";
-
-    
+    timeIcon.node.alt = "time icon";   
 
     const timeCheckBox = new Control(timeContainer.node, 'input', '', '');
     timeCheckBox.node.type = "checkbox";
-    timeCheckBox.node.checked = this._check;
+    timeCheckBox.node.checked = this.check;
 
     const timeLabel = new Control(timeContainer.node, 'label', '', '');
 
-    const timeBar = new SettingTimeBar(timeLabel.node, this.settingModel, this.checked);
+    const timeBar = new SettingTimeBar(timeLabel.node, this.settingModel, this.check);
 
     const timeTitle = new Control(timeContainer.node, 'h3', '', 'Time');
 

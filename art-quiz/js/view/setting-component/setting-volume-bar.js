@@ -5,6 +5,7 @@ export default class SettingVolumeBar extends Control {
     super(parentNode);
     this._settingModel = settingModel;
     this._check = check;
+   
     this._value = this._settingModel.getSetting('volume', 'value');
 
     const volumeBar = new Control(this.node, 'input');

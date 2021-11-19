@@ -6,7 +6,7 @@ export default class SettingVolume extends Control{
     super(parentNode);
     this.settingModel = settingModel;
 
-    this._check = this.settingModel.getSetting('volume', 'check');
+    this.check = this.settingModel.getSetting('volume', 'check');
     this._value = this.settingModel.getSetting('volume', 'value');
 
     const volumeContainer = new Control(this.node, 'div', 'volume sound', '');
@@ -16,9 +16,9 @@ export default class SettingVolume extends Control{
 
     const volumeCheckBox = new Control(volumeContainer.node, 'input', '', '');
     volumeCheckBox.node.type = "checkbox";
-    volumeCheckBox.node.checked = this._check;
+    volumeCheckBox.node.checked = this.check;
 
-    const volumeBar = new SettingVolumeBar(volumeContainer.node, this.settingModel, this.checked);
+    const volumeBar = new SettingVolumeBar(volumeContainer.node, this.settingModel, this.check);
 
     const volumeTitle = new Control(volumeContainer.node, 'h3', '', 'Volume');
 

@@ -19,7 +19,7 @@ export default class TimeVolumeBar extends Control {
 
     timeBar.node.oninput = (evt) => {
       timeBar.node.style.background = `linear-gradient(to right, #660033 0%, #660033 ${(evt.target.value - 5) * 20 / 5}%, rgb(247,247,247) ${(evt.target.value - 5) * 20 / 5}%, rgb(247,247,247) 100%)`;
-      timeSpan.node.textContent = this._value;
+      timeSpan.node.textContent = evt.target.value;
       this._settingModel.setSetting('time', evt.target.value, this._check);
     }
   }

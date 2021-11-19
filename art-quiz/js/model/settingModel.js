@@ -12,20 +12,30 @@ export default class SettingModel {
       },
       'time': {
         'value': 10,
-        'check': false}
+        'check': false
+      }
     };
     this._updateSettings();
     this._saveSettings();
-    console.log(this._settings['volume'])
   }
 
   getSetting(key, value) {
     return this._settings[key][value];
   }
 
+  getLanguage() {
+    console.log(this._settings['language']);
+    return this._settings['language'];
+  }
+
   setSetting(key, value, check) {
     this._settings[key]['value'] = value;
-    this._settings[key]['check'] = check;    
+    this._settings[key]['check'] = check;
+  }
+
+  setLanguage(value) {
+    this._settings['language'] = value;
+    console.log(this._settings['language']);
   }
 
   _updateSettings() {

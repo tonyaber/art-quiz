@@ -7,7 +7,7 @@ export default class SettingMusic extends Control {
     super(parentNode);
     this.settingModel = settingModel;
 
-    this._check = this.settingModel.getSetting('music', 'check');
+    this.check = this.settingModel.getSetting('music', 'check');
     this._value = this.settingModel.getSetting('music', 'value');
 
     const musicContainer = new Control(this.node, 'div', 'music sound', '');
@@ -17,9 +17,9 @@ export default class SettingMusic extends Control {
 
     const musicCheckBox = new Control(musicContainer.node, 'input', '', '');
     musicCheckBox.node.type = "checkbox";
-    musicCheckBox.node.checked = this._check;
+    musicCheckBox.node.checked = this.check;
 
-    const musicBar = new SettingMusicBar(musicContainer.node, this.settingModel, this.checked);
+    const musicBar = new SettingMusicBar(musicContainer.node, this.settingModel, this.check);
 
     const musicTitle = new Control(musicContainer.node, 'h3', '', 'Music');
 
