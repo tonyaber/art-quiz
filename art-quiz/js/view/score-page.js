@@ -1,11 +1,13 @@
 import Abstract from "./abstract.js"
 
 const createScorePage = (questions, answers) => {
+  
   const createItemTemplate = (index) => {
+    console.log(questions[index]['imageNum'])
     return `<div class="score-item ${answers[index] ? 'check' : ''}">
             <h3>${index + 1}</h3>
             <img class="check" src="./assets/svg/${answers[index] ? 'correct_answer' : 'wrong_answer'}.svg" alt="check">
-            <img class="image" src="https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings/${questions[index]['imageNum']}.jpg" alt="image">
+            <img class="image" src="./assets/img/paintings/${questions[index]['imageNum']}.jpg" alt="image">
             <div class="answer">
               <span>${questions[index]['name']}</span>
               <span>${questions[index]['author']}</span>

@@ -12,6 +12,7 @@ import ScorePage from './view/score-page.js';
 import QuestionArtistsHeader from './view/question-artists-page-header.js';
 import QuestionArtistsMain from './view/question-artists-page-main.js';
 import SettingPage from './view/setting-page.js';
+import SettingModel from './model/settingModel.js';
 
 const body = document.querySelector('body');
 const header = body.querySelector('header');
@@ -43,11 +44,14 @@ export default class Quiz {
 
   init() {
     this._questionModel = new QuestionModel();
+    this._questionModel.buildAllQuestions();
     this._startPageHeader = new StartPageHeader();
     this._startPageMain = new StartPageMain();
     this._categoriesPageHeader = new CategoriesPageHeader();
     this._categoriesPageMain = new CategoriesPageMain(this._categories);
+    this.settingModel = new SettingModel();
     this._renderStartPage();
+
   }
 
   _renderStartPage() {    
@@ -58,6 +62,7 @@ export default class Quiz {
   }
 
   _renderCategoriesPage() {
+    
     this._categoriesPageMain.setQuestion(this._categories);
     this._categoriesPageMain.setAnswers(this._questionModel.getCheckAnswerForCategory());
     renderElement(this._categoriesPageHeader, header);
@@ -76,6 +81,7 @@ export default class Quiz {
 
   _renderQuestion() {
     this._allQuestions = this._questionModel.getAllQuestions();
+
     //вытянуть с модели все 10 вопросов и варианты ответов
     //масив с 10 вопросов, каждый имеет 4 варианта ответа
     //
@@ -188,7 +194,9 @@ export default class Quiz {
 
   _showSettingHandlerMain() {
     this._startPageMain.destroy();
-    this._settingPage = new SettingPage();
+    
+    this._settingPage = new SettingPage(this.settingModel);
+    this._settingPage.init();
     this._settingPage.saveSetting(this._saveSettingHandler);
     renderElement(this._settingPage, main);
   }

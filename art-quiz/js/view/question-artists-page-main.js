@@ -16,7 +16,7 @@ const createQuestionArtistsPageMain = (question, allQuestions, answers, countAns
 
   const createQuestionsTemplate = (item) => {
     return `<li>
-              <img src="https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings/${item.imageNum}.jpg" 
+              <img src="./assets/img/paintings/${item.imageNum}.jpg"
               alt="${item.imageNum}">
             </li>`
   }

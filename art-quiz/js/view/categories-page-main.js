@@ -1,10 +1,11 @@
 import Abstract from "./abstract.js";
 const createCategoriesPageMain = (questions, answers) => {
+  
   const createItemTemplate = (index) => {
     const templateCount = answers[index]['isPlay'] ? answers[index]['count'] + '/10' : '';
     return `<div class="categories_item ${answers[index]['isPlay'] ? 'passed' :''}">
       <h3>${index+1}</h3>
-      <img src="https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings/${questions[index*10].imageNum}.jpg" alt="category image">
+      <img src="./assets/img/paintings/${questions[index*10].imageNum}.jpg" alt="category image">
       <span>${templateCount}</span>
       <button>Score</button>
     </div>`
@@ -30,6 +31,7 @@ export default class CategoriesPageMain extends Abstract{
     this._questions = questions;
     this._answers;
     this._type;
+    this._photo;
     this._categoriesChangeHandler = this._categoriesChangeHandler.bind(this);
     this._categoriesBackToMainHandler = this._categoriesBackToMainHandler.bind(this);
     this._showResultHandler = this._showResultHandler.bind(this);
@@ -37,14 +39,15 @@ export default class CategoriesPageMain extends Abstract{
   }
 
   setQuestion(questions) {
-    this._questions = questions;    
+    this._questions = questions;
   }
 
   setAnswers(answers) {
     this._answers = answers;
   }
+
   
-  getTemplate() {    
+  getTemplate() {
     return createCategoriesPageMain(this._questions, this._answers);
   }
 

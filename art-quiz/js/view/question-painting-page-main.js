@@ -23,7 +23,7 @@ const createQuestionPaintingPageMain = (question, allQuestions, answers, countAn
 
   return `<div class="question_main">
     <div class="question_painting_image">
-      <img src="https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings/${question.imageNum}.jpg">
+      <img src="./assets/img/paintings/${question.imageNum}.jpg">
       <ul>
         ${answersTemplate}
       </ul>

@@ -13,7 +13,7 @@ export default class QuestionModel{
       'pictures': {}
     };
     this._answerForCategory = {};
-    this._getAllQuestions();
+    this._cache = new Map();
     this._createAnswer();
     this._saveAnswers();
   }
@@ -33,7 +33,7 @@ export default class QuestionModel{
     }
   }
 
-  _getAllQuestions(){
+  buildAllQuestions(){
     fetch('./data/data.json')
       .then((json) => json.json())
       .then((questions)=>this._allQuestions=questions)
@@ -57,6 +57,26 @@ export default class QuestionModel{
     return this._categories;
   }
 
+  async getCategoryPhoto() {
+    const categoryPhoto = [];
+    for (let i = 0; i < 12; i++){
+      const num = this._categories[i * 10]['imageNum'];
+      const imgBlob = await this.loadImage(num);
+      categoryPhoto.push(imgBlob)
+    }
+    return categoryPhoto
+  }
+
+  async loadImage(imageNum) {
+    if (this._cache.has(imageNum)) {
+      return this._cache.get(imageNum);
+    } else {
+      const loadResponse = await fetch(`./assets/img/paintings/${imageNum}.jpg`);
+      const imgBlob = await loadResponse.blob();
+      this._cache.set(imageNum, imgBlob);
+      return imgBlob;
+    }
+  }
   getCategoriesQuestions(index) {
     this._indexCategory = index
     switch (this._type) {

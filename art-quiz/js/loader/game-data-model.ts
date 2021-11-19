@@ -23,7 +23,7 @@ interface IQuestionData{
   year: string,
 }
 
-//https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings/number.jpg
+//все картинки для одной категории 
 /*
 class GameDataModel implements IGameData {
   public questions: Array<IQuestion>;
@@ -37,8 +37,10 @@ class GameDataModel implements IGameData {
 
     for (let i = 0; i < categoryQuestionsData.length; i++){
       const item = categoryQuestionsData[i];
-      const loadResponse = await fetch(`https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings/${item.imageNum}.jpg`);
+      const loadResponse = await fetch(`./assets/img/paintings/${item.imageNum}.jpg`);
       const imgBlob = await loadResponse.blob();
+
+      //закинуть все варианты в variants, индекс правильного ответа в correctAnswerIndex
       const question: IQuestion = {
         variants: [],
         correctAnswerIndex: 0,
@@ -50,8 +52,8 @@ class GameDataModel implements IGameData {
 }
 */
 //URL.createObjectURL(blob);
-
-class GameDataModel implements IGameData {
+ //картинки для одного вопроса 
+export default class GameDataModel implements IGameData {
   public questions: Array<IQuestion>;
   private _data: IQuestionData[];
   private _category: number;
@@ -60,14 +62,16 @@ class GameDataModel implements IGameData {
   constructor(data: IQuestionData[], category: number) {
     const categoryQuestionsData = data.slice(category * 10, 10);
     const categoryQuestions: Array<IQuestion> = [];
+    console.log(data, category)
     for (let i = 0; i < categoryQuestionsData.length; i++) {
       const item = categoryQuestionsData[i];
-      /*const variant: IAnswer = {
-        imageUrl: `https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings/${item.imageNum}.jpg`
+     /* const variant: IAnswer = {
+        imageUrl: `./assets/img/paintings/${item.imageNum}.jpg`
+        //тут сформировать всю другую инфу по вариантам ответа?
       }*/
       const question: IQuestion = {
-        variants: [],
-        correctAnswerIndex: 0,
+        variants: [],//тут 4 варианта для ответа
+        correctAnswerIndex: 0,//индекс правильного ответа
       }
       categoryQuestions.push(question)
     }
@@ -85,7 +89,7 @@ class GameDataModel implements IGameData {
     if (this.cache.has(imageNum)) {
       return this.cache.get(imageNum);
     } else {
-      const loadResponse = await fetch(`https://raw.githubusercontent.com/tonyaber/pictures/main/art-quiz/paintings/${imageNum}.jpg`);
+      const loadResponse = await fetch(`./assets/img/paintings/${imageNum}.jpg`);
       const imgBlob = await loadResponse.blob();
       this.cache.set(imageNum, imgBlob);
       return imgBlob;

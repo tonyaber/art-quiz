@@ -22,4 +22,6 @@ export default class QuestionArtistsHeader extends Abstract {
   getTemplate() {
     return createQuestionArtistsPageHeader(this._question);
   }
+
+  
 }
