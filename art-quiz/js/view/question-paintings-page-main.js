@@ -1,28 +1,19 @@
 import { COUNT_QUESTION } from "../const.js";
 import Abstract from "./abstract.js"
 
-const createQuestionPaintingsPageMain = (question, allQuestions, answers, countAnswers) => {
-  const uniqueArrayAuthors = [];
-  const uniqueName = [];
-  allQuestions.slice().sort(() => Math.random() - 0.5).forEach(item => {
-    if (item['author'] != question.author && !uniqueName.includes(item['author'])) {
-      uniqueArrayAuthors.push(item);
-      uniqueName.push(item['author']);
-    }
-  })
+const createQuestionPaintingsPageMain = (variants, answers, countAnswers, photos) => {
   
-  const wrongAnswers = uniqueArrayAuthors.slice(0, 3);
-  wrongAnswers.push(question);
-  const allAnswers = wrongAnswers.sort(() => Math.random() - 0.5);
 
-  const createQuestionsTemplate = (item) => {
+  const createQuestionsTemplate = (item,index) => {
+    const srcImage = URL.createObjectURL(photos[index]);  
+
     return `<li>
-              <img src="./assets/img/paintings/${item.imageNum}.jpg"
+              <img src="${srcImage}"
               alt="${item.imageNum}">
             </li>`
   }
 
-  const imageTemplate = allAnswers.map(item => createQuestionsTemplate(item)).join('');
+  const imageTemplate = variants.map((item,index)=> createQuestionsTemplate(item, index)).join('');
   
   const createAnswersTemplate = (check) => {
     return `<li class="${check ? 'true' : 'false'}"></li>`
@@ -45,18 +36,17 @@ const createQuestionPaintingsPageMain = (question, allQuestions, answers, countA
 }
 
 export default class QuestionPaintingsMain extends Abstract{
-  constructor(question, allQuestions, answers, index) {
+  constructor(variants, answers, index, photos) {
     super();
-    this._question = question;
-    this._allQuestions = allQuestions;
+    this._variants = variants;
     this._answers = answers;
     this._index = index;
+    this._photos = photos;
     this._checkAnswerHandler = this._checkAnswerHandler.bind(this);
-
   }
 
   getTemplate() {
-    return createQuestionPaintingsPageMain(this._question, this._allQuestions, this._answers, this._index);
+    return createQuestionPaintingsPageMain(this._variants, this._answers, this._index, this._photos);
     
   }
 

@@ -19,8 +19,7 @@ export default class MusicVolumeBar extends Control {
     musicBar.node.oninput = (evt) => {
       musicBar.node.style.background = `linear-gradient(to right, #660033 0%, #660033 ${evt.target.value*100}%, rgb(247,247,247) ${evt.target.value*100}%, rgb(247,247,247) 100%)`;
       this._settingModel.setSetting('music', evt.target.value);
-      console.log(this._settingModel.getAllSetting())
-      Sound.updateSetting(this._settingModel.getAllSetting())
+      Sound.updateSetting(this._settingModel.getAllSetting());
     }
   }
 }

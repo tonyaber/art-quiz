@@ -1,13 +1,14 @@
 import { COUNT_QUESTION, LANGUAGE } from "../const.js";
 import Abstract from "./abstract.js"
 
-const createScorePage = (questions, answers, language) => {
+const createScorePage = (questions, answers, language, photos) => {
   
   const createItemTemplate = (index) => {
+    const srcImage = URL.createObjectURL(photos[index]);
     return `<div class="score-item ${answers[index] ? 'check' : ''}">
             <h3>${index + 1}</h3>
             <img class="check" src="./assets/svg/${answers[index] ? 'correct_answer' : 'wrong_answer'}.svg" alt="check">
-            <img class="image" src="./assets/img/paintings/${questions[index]['imageNum']}.jpg" alt="image">
+            <img class="image" src="${srcImage}" alt="image">
             <div class="answer">
               <span>${questions[index]['name']}</span>
               <span>${questions[index]['author']}</span>
@@ -31,17 +32,18 @@ const createScorePage = (questions, answers, language) => {
 }
 
 export default class ScorePage extends Abstract {
-  constructor(questions, answers, language) {
+  constructor(questions, answers, language, photos) {
     super();
     this._questions = questions;
     this._answers = answers;
     this._language = language;
+    this._photos = photos;
     this._backToHomeHandler = this._backToHomeHandler.bind(this);
     this._backToCategory = this._backToCategory.bind(this);
     this.showInformation();
   }
   getTemplate() {
-    return createScorePage(this._questions, this._answers, this._language);
+    return createScorePage(this._questions, this._answers, this._language, this._photos);
   }
 
   _backToHomeHandler(evt) {

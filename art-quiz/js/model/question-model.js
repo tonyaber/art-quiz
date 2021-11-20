@@ -41,9 +41,10 @@ export default class QuestionModel {
   }
 
   buildAllQuestions() {
-    fetch(LANGUAGE[this._language]['json'])
+    return fetch(LANGUAGE[this._language]['json'])
       .then((json) => json.json())
       .then((questions) => this._allQuestions = questions)
+      .then(questions => questions);
   }
 
 
@@ -64,26 +65,7 @@ export default class QuestionModel {
     return this._categories;
   }
 
-  async getCategoryPhoto() {
-    const categoryPhoto = [];
-    for (let i = 0; i < COUNT_CATEGORIES; i++) {
-      const num = this._categories[i * COUNT_QUESTION]['imageNum'];
-      const imgBlob = await this.loadImage(num);
-      categoryPhoto.push(imgBlob)
-    }
-    return categoryPhoto
-  }
-
-  async loadImage(imageNum) {
-    if (this._cache.has(imageNum)) {
-      return this._cache.get(imageNum);
-    } else {
-      const loadResponse = await fetch(`./assets/img/paintings/${imageNum}.jpg`);
-      const imgBlob = await loadResponse.blob();
-      this._cache.set(imageNum, imgBlob);
-      return imgBlob;
-    }
-  }
+  
   getCategoriesQuestions(index) {
     this._indexCategory = index
     switch (this._type) {

@@ -1,17 +1,9 @@
 import { COUNT_QUESTION } from "../const.js";
 import Abstract from "./abstract.js";
 
-const createQuestionArtistsPageMain = (question, allQuestions, answers, countAnswers) => {
-  const uniqueAuthors = [...new Set(allQuestions.map(item => item.author))]
-
-  const wrongAuthors = uniqueAuthors.filter(item => item != question.author)
-    .sort(() => Math.random() - 0.5).slice(0, 3);
-  wrongAuthors.push(question.author);
-
-  const allAuthors = wrongAuthors.sort(() => Math.random() - 0.5);
-
+const createQuestionArtistsPageMain = (variants, answers, countAnswers, photo) => {
   const authorsTemplate = () => {
-    return allAuthors.map(item => item = `<li>${item}</li>`)
+    return variants.map(item => item = `<li>${item}</li>`)
       .join('');
   }
   const createAnswersTemplate = (check) => {
@@ -21,10 +13,10 @@ const createQuestionArtistsPageMain = (question, allQuestions, answers, countAns
   const answersTemplate = new Array(COUNT_QUESTION).fill(null)
     .map((item, index) => item = (index < countAnswers) ? createAnswersTemplate(answers[index]) : '<li></li>')
     .join('');
-
+  const srcImage = URL.createObjectURL(photo);
   return `<div class="question_main">
     <div class="question_painting_image">
-      <img src="./assets/img/paintings/${question.imageNum}.jpg">
+      <img src="${srcImage}">
       <ul>
         ${answersTemplate}
       </ul>
@@ -38,17 +30,17 @@ const createQuestionArtistsPageMain = (question, allQuestions, answers, countAns
 }
 
 export default class QuestionArtistsMain extends Abstract {
-  constructor(question, allQuestions,answers, index) {
+  constructor(variants, answers, index, photo) {
     super();
-    this._question = question;
-    this._allQuestions = allQuestions;
+    this._variants = variants;
     this._answers = answers;
     this._index = index;
+    this._photo = photo
     this._checkAnswerHandler = this._checkAnswerHandler.bind(this)
   }
 
   getTemplate() {
-    return createQuestionArtistsPageMain(this._question, this._allQuestions, this._answers, this._index)
+    return createQuestionArtistsPageMain(this._variants, this._answers, this._index, this._photo)
   }
   
   _checkAnswerHandler(evt) {

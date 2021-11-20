@@ -1,12 +1,12 @@
 import { COUNT_CATEGORIES, COUNT_QUESTION, LANGUAGE } from "../const.js";
 import Abstract from "./abstract.js";
-const createCategoriesPageMain = (questions, answers, language) => {
-  
+const createCategoriesPageMain = (photos, answers, language) => {
   const createItemTemplate = (index) => {
+    const srcImage = URL.createObjectURL(photos[index]);
     const templateCount = answers[index]['isPlay'] ? answers[index]['count'] + '/10' : '';
     return `<div class="categories_item ${answers[index]['isPlay'] ? 'passed' :''}">
       <h3>${index+1}</h3>
-      <img src="./assets/img/paintings/${questions[index*COUNT_QUESTION].imageNum}.jpg" alt="category image">
+       <img src="${srcImage}" alt="category image">
       <span>${templateCount}</span>
       <button>${LANGUAGE[language]['score']}</button>
     </div>`
@@ -27,13 +27,12 @@ const createCategoriesPageMain = (questions, answers, language) => {
 }
 
 export default class CategoriesPageMain extends Abstract{
-  constructor(questions, language) {
+  constructor(photo, language) {
     super();
-    this._questions = questions;
+    this._photo = photo;
     this._language = language;
     this._answers;
-    this._type;
-    this._photo;
+  
     this._categoriesChangeHandler = this._categoriesChangeHandler.bind(this);
     this._categoriesBackToMainHandler = this._categoriesBackToMainHandler.bind(this);
     this._showResultHandler = this._showResultHandler.bind(this);
@@ -50,7 +49,7 @@ export default class CategoriesPageMain extends Abstract{
 
   
   getTemplate() {
-    return createCategoriesPageMain(this._questions, this._answers, this._language);
+    return createCategoriesPageMain(this._photo, this._answers, this._language);
   }
 
   _categoriesChangeHandler(index) {

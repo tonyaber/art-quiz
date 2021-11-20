@@ -48,7 +48,11 @@ class Sound {
       this._music.currentTime = 0;
     }
     this._music.volume = this._musicValue;  
-    this._music.play();    
+    this._music.play();
+    this._music.onended = () => {
+      this._music.currentTime = 0;
+      this._music.play()
+    }
   }
 }
 

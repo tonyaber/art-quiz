@@ -1,4 +1,4 @@
-import { renderElement, renderPopup} from './utils.js';
+import { createElement, renderElement, renderPopup} from './utils.js';
 import StartPageHeader from "./view/start-page-header.js";
 import StartPageMain from "./view/start-page-main.js";
 import CategoriesPageMain from "./view/categories-page-main.js";
@@ -15,6 +15,8 @@ import SettingModel from './model/setting-model.js';
 import QuestionModel from './model/question-model.js';
 import Timer from './view/timer.js';
 import Sound from './loader/sound.js'
+import PhotoLoader from './loader/photo-loader.js';
+import Spinner from './view/spinner.js';
 
 const body = document.querySelector('body');
 const header = body.querySelector('header');
@@ -28,8 +30,11 @@ export default class Quiz {
     this._indexCategory = 0;
     this._allQuestions = [];
     this._categories = [];
+    this._categoryPhoto = [];
     this._question = {};
     this._setting = {};
+    this._photo;
+    this._nextPhoto;
     this._categoriesQuestions = [];
     this._typeChangeHandler = this._typeChangeHandler.bind(this);
     this._categoriesChangeHandler = this._categoriesChangeHandler.bind(this);
@@ -48,15 +53,20 @@ export default class Quiz {
   }
 
   init() {
+    this._spinner = new Spinner();
+    this._photoLoader = new PhotoLoader();
     this.settingModel = new SettingModel();
     this._setting = this.settingModel.getAllSetting();
     this._language = this.settingModel.getLanguage();
     Sound.updateSetting(this._setting);
 
     this._questionModel = new QuestionModel(this._language);
-    this._questionModel.buildAllQuestions();
-    
-    this._renderStartPage();
+    this._questionModel.buildAllQuestions()
+      .then(questions => {
+        this._renderStartPage();
+        this._photoLoader.setQuestion(questions);
+        this._photoLoader.getAllPhoto(questions);
+      });   
   }
 
   _renderStartPage() {
@@ -68,9 +78,9 @@ export default class Quiz {
     this._startPageMain.showSetting(this._showSettingHandlerMain);
   }
 
-  _renderCategoriesPage() {
+  _renderCategoriesPage() {    
     this._categoriesPageHeader = new CategoriesPageHeader();
-    this._categoriesPageMain = new CategoriesPageMain(this._categories, this._language);    
+    this._categoriesPageMain = new CategoriesPageMain(this._categoryPhoto, this._language);    
     this._categoriesPageMain.setQuestion(this._categories);
     this._categoriesPageMain.setAnswers(this._questionModel.getCheckAnswerForCategory());
     renderElement(this._categoriesPageHeader, header);
@@ -89,14 +99,10 @@ export default class Quiz {
 
   _renderQuestion() {
     this._allQuestions = this._questionModel.getAllQuestions();
-
-    //вытянуть с модели все 10 вопросов и варианты ответов
-    //масив с 10 вопросов, каждый имеет 4 варианта ответа
-    //
     this._showQuestion();
   }
 
-  _showQuestion() {   
+  _showQuestion() {
     this._question = this._categoriesQuestions[this._indexQuestion];
     const answers = this._questionModel.getCheckAnswer(this._indexCategory);
     const timerCheck = this._setting['time']['check'];
@@ -105,18 +111,62 @@ export default class Quiz {
         this._questionPainingHeader = new QuestionArtistsHeader(this._language);
         this._questionPainingHeader.backToMain(this._backToMainFromQuesting);
         this._checkTimer(timerCheck);
-        this._questionPainingMain = new QuestionArtistsMain(this._question, this._allQuestions, answers, this._indexQuestion);
+        this._downloadPhoto(answers);
         break;
       default:
         this._questionPainingHeader = new QuestionPaintingHeader(this._question, this._language);
         this._questionPainingHeader.backToMain(this._backToMainFromQuesting);
         this._checkTimer(timerCheck);
-        this._questionPainingMain = new QuestionPaintingMain(this._question, this._allQuestions, answers, this._indexQuestion);
+        this._downloadPhoto(answers);        
     }
-    
-    renderElement(this._questionPainingHeader, header);
-    renderElement(this._questionPainingMain, main);
-    this._questionPainingMain.checkAnswer(this._checkAnswerHandler)
+    Promise.all([
+      this._photo,
+      this._nextPhoto
+    ]).then(() => {
+      renderElement(this._questionPainingHeader, header);
+      renderElement(this._questionPainingMain, main);
+      this._questionPainingMain.checkAnswer(this._checkAnswerHandler)
+    })    
+  }
+
+  _downloadPhoto(answers) {
+    switch (this._type) {
+      case 'artists':
+        const allAuthors = this._createVariantsForArtists();
+        this._photo = this._photoLoader.getPhotoForArtists(this._indexCategory, this._indexQuestion).then((photo) => {
+          this._questionPainingMain = new QuestionArtistsMain(allAuthors, answers, this._indexQuestion, photo);
+        });
+        this._nextPhoto = this._photoLoader.getPhotoForArtists(this._indexCategory, this._indexQuestion + 1);
+        break;
+      default:
+        this._allAnswersForPaintings = this._createVariantsForPaintings(this._question);
+        this._photo = this._photoLoader.getPhotoForPaintings(this._allAnswersForPaintings).then((photos) => {
+          this._questionPainingMain = new QuestionPaintingMain(this._allAnswersForPaintings, answers, this._indexQuestion, photos);
+        });
+        this._nextPhoto = this._photoLoader.getPhotoForPaintings(this._allAnswersForPaintings);
+    }
+  }
+
+  _createVariantsForArtists() {
+    const uniqueAuthors = [...new Set(this._allQuestions.map(item => item.author))];
+    const wrongAuthors = uniqueAuthors.filter(item => item != this._question.author)
+      .sort(() => Math.random() - 0.5).slice(0, 3);
+    wrongAuthors.push(this._question.author);
+    return wrongAuthors.sort(() => Math.random() - 0.5);
+  }
+
+  _createVariantsForPaintings(question) {
+    const uniqueArrayAuthors = [];
+    const uniqueName = [];
+    this._allQuestions.slice().sort(() => Math.random() - 0.5).forEach(item => {
+      if (item['author'] != question.author && !uniqueName.includes(item['author'])) {
+        uniqueArrayAuthors.push(item);
+        uniqueName.push(item['author']);
+      }
+    })
+    const wrongAnswers = uniqueArrayAuthors.slice(0, 3);
+    wrongAnswers.push(question);
+    return wrongAnswers.sort(() => Math.random() - 0.5);
   }
 
   _checkTimer(timerCheck) {
@@ -136,19 +186,25 @@ export default class Quiz {
   _typeChangeHandler(type) {
     this._startPageHeader.destroy();
     this._startPageMain.destroy();
+    renderElement(this._spinner, main)
     this._type = type;
+    this._photoLoader.setType(type);
+  
+    this._photoLoader.getCategoryPhoto().then(photo => {
+      this._categoryPhoto = photo;
+      this._renderCategoriesPage();
+      this._spinner.destroy();
+    })
     this._categories = this._questionModel.getCategories(type)
-
-    this._renderCategoriesPage();
   }
 
-  _categoriesChangeHandler(index) {
+  _categoriesChangeHandler(index) {    
     this._indexCategory = index;
     this._indexQuestion = 0;
     this._categoriesQuestions = this._questionModel.getCategoriesQuestions(this._indexCategory);
     this._categoriesPageMain.destroy();
-    this._categoriesPageHeader.destroy();
-    this._renderQuestion();
+    this._categoriesPageHeader.destroy();        
+    this._renderQuestion(); 
   }
 
   _backToMainHandler() {
@@ -163,6 +219,7 @@ export default class Quiz {
       this._questionPainingHeader.destroy();
       this._questionPainingMain.destroy();
       this._indexQuestion++;
+      this._question = this._categoriesQuestions[this._indexQuestion];      
       this._showQuestion();
     } else {
       this._popupAnswer.destroyPopup();
@@ -224,13 +281,20 @@ export default class Quiz {
   _showResultHandler(index) {
     this._categoriesPageMain.destroy();
     let questions = this._questionModel.getCategoriesQuestions(index);
-    let answers = this._questionModel.getCheckAnswer(index);  
+    let answers = this._questionModel.getCheckAnswer(index);
+    
+    renderElement(this._spinner, main);
 
-    this._scorePage = new ScorePage(questions, answers, this._language);
-    this._scorePage.backToMain(this._backToMainFromScoreHandler);
-    this._scorePage.backToCategory(this._backToCategoryHandler);
+    this._photoLoader.getPhotoForScore(index).then((photos) => {
+      this._spinner.destroy();
+      this._scorePage = new ScorePage(questions, answers, this._language,photos);
+      this._scorePage.backToMain(this._backToMainFromScoreHandler);
+      this._scorePage.backToCategory(this._backToCategoryHandler);
 
-    renderElement(this._scorePage, main);
+      renderElement(this._scorePage, main);
+    })
+
+    
   }
 
   _showSettingHandlerMain() {
@@ -255,7 +319,6 @@ export default class Quiz {
   _saveSettingHandler() {
     this._startPageHeader.destroy();
     this._settingPage.destroy();
-<<<<<<< HEAD
 
     const oldLanguage = this._language;
 
@@ -267,17 +330,6 @@ export default class Quiz {
       this._questionModel.buildAllQuestions();
     }
     Sound.updateSetting(this._setting);
-
-=======
-    const oldLanguage = this._language;
-    this._setting = this.settingModel.getAllSetting();
-    this._language = this.settingModel.getLanguage();
-    if(oldLanguage!=this._language){
-
-      this._questionModel.changeLanguage(this._language);
-      this._questionModel.buildAllQuestions();
-    }
->>>>>>> 80259acc119bb7c41028a6ff3430141d16c51d96
     this._renderStartPage();
   }
 }
