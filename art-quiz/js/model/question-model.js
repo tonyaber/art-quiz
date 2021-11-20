@@ -1,12 +1,15 @@
-export default class QuestionModel{
-  constructor() {
+import { COUNT_CATEGORIES, COUNT_QUESTION, LANGUAGE } from "../const.js";
+
+export default class QuestionModel {
+  constructor(language) {
+    this._language = language;
     this._allQuestions = [];
     this._categories = [];
     this._type = '';
     this._indexCategory = 0;
     this._answers = {
       'artists': {},
-      'pictures':{}
+      'pictures': {}
     };
     this._checkAnswerForCategory = {
       'artists': {},
@@ -23,9 +26,9 @@ export default class QuestionModel{
       this._answers = JSON.parse(localStorage.getItem('tonyaber-answers'));
     } else {
       for (let key in this._answers) {
-        new Array(12).fill(null).map((item, index) => item = index).forEach(item => {
+        new Array(COUNT_CATEGORIES).fill(null).map((item, index) => item = index).forEach(item => {
           this._answers[key][item] = { 'isPlay': false };
-          for (let i = 0; i < 10; i++){
+          for (let i = 0; i < COUNT_QUESTION; i++) {
             this._answers[key][item][i] = false;
           }
         });
@@ -33,13 +36,17 @@ export default class QuestionModel{
     }
   }
 
-  buildAllQuestions(){
-    fetch('./data/data-en.json')
-      .then((json) => json.json())
-      .then((questions)=>this._allQuestions=questions)
+  changeLanguage(language) {
+    this._language = language;
   }
 
- 
+  buildAllQuestions() {
+    fetch(LANGUAGE[this._language]['json'])
+      .then((json) => json.json())
+      .then((questions) => this._allQuestions = questions)
+  }
+
+
   getAllQuestions() {
     return this._allQuestions;
   }
@@ -59,8 +66,8 @@ export default class QuestionModel{
 
   async getCategoryPhoto() {
     const categoryPhoto = [];
-    for (let i = 0; i < 12; i++){
-      const num = this._categories[i * 10]['imageNum'];
+    for (let i = 0; i < COUNT_CATEGORIES; i++) {
+      const num = this._categories[i * COUNT_QUESTION]['imageNum'];
       const imgBlob = await this.loadImage(num);
       categoryPhoto.push(imgBlob)
     }
@@ -81,20 +88,20 @@ export default class QuestionModel{
     this._indexCategory = index
     switch (this._type) {
       case 'artists':
-        index=index;
+        index = index;
         break;
       default:
         index += 12;
         break;
     }
-    return this._allQuestions.slice(index* 10,index * 10 + 10)
+    return this._allQuestions.slice(index * COUNT_QUESTION, index * COUNT_QUESTION + COUNT_QUESTION)
   }
 
   setCheckAnswer(index, check) {
     this._answers[this._type][this._indexCategory][index] = check;
     this._answers[this._type][this._indexCategory]['isPlay'] = true;
   }
-  
+
   getCheckAnswer(index) {
     return this._answers[this._type][index];
   }

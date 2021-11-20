@@ -1,6 +1,8 @@
 import { createElement } from "../utils.js";
 import Abstract from "./abstract.js";
 
+const TIME_OF_CHANGE_TIMER = 1000;
+
 const createTimer = (value) => {
   return `<img src="./assets/svg/timer.svg" alt="timer icon">
       <span>00:${value}</span>`
@@ -19,7 +21,7 @@ export default class Timer extends Abstract{
   }
 
   render() {
-    this._timer = setInterval(this.setTimer, 1000);
+    this._timer = setInterval(this.setTimer, TIME_OF_CHANGE_TIMER);
   }
 
   setTimer() {

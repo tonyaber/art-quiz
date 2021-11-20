@@ -1,3 +1,4 @@
+import { COUNT_QUESTION } from "../const.js";
 import Abstract from "./abstract.js"
 
 const createQuestionPaintingsPageMain = (question, allQuestions, answers, countAnswers) => {
@@ -27,7 +28,7 @@ const createQuestionPaintingsPageMain = (question, allQuestions, answers, countA
     return `<li class="${check ? 'true' : 'false'}"></li>`
   }
 
-  const answersTemplate = new Array(10).fill(null)
+  const answersTemplate = new Array(COUNT_QUESTION).fill(null)
     .map((item, index) => item = (index < countAnswers) ? createAnswersTemplate(answers[index]) : '<li></li>')
     .join('');
   

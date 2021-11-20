@@ -660,7 +660,7 @@ header img {
   transition: all 0.5s;
 }
 
-.score-item:hover .answer {
+.score-item.open .answer {
   opacity: 1;
   transition: all 0.5s;
 }

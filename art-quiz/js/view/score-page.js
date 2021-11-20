@@ -1,6 +1,7 @@
+import { COUNT_QUESTION, LANGUAGE } from "../const.js";
 import Abstract from "./abstract.js"
 
-const createScorePage = (questions, answers) => {
+const createScorePage = (questions, answers, language) => {
   
   const createItemTemplate = (index) => {
     return `<div class="score-item ${answers[index] ? 'check' : ''}">
@@ -15,13 +16,13 @@ const createScorePage = (questions, answers) => {
           </div>`
   }
 
-  const itemTemplate = new Array(10).fill(null).map((item, index) => item = createItemTemplate(index)).join('');
+  const itemTemplate = new Array(COUNT_QUESTION).fill(null).map((item, index) => item = createItemTemplate(index)).join('');
 
   return `<div class="score_main">
         <div class="score-top">
-          <button class="score_home">Home</button>
-          <h2>Score</h2>
-          <button class="score_category">Category</button>
+          <button class="score_home">${LANGUAGE[language]['home']}</button>
+          <h2>${LANGUAGE[language]['score']}</h2>
+          <button class="score_category">${LANGUAGE[language]['categories']}</button>
         </div>
         <div class="score-list">
           ${itemTemplate}
@@ -30,15 +31,17 @@ const createScorePage = (questions, answers) => {
 }
 
 export default class ScorePage extends Abstract {
-  constructor(questions, answers) {
+  constructor(questions, answers, language) {
     super();
     this._questions = questions;
     this._answers = answers;
+    this._language = language;
     this._backToHomeHandler = this._backToHomeHandler.bind(this);
     this._backToCategory = this._backToCategory.bind(this);
+    this.showInformation();
   }
   getTemplate() {
-    return createScorePage(this._questions, this._answers);
+    return createScorePage(this._questions, this._answers, this._language);
   }
 
   _backToHomeHandler(evt) {
@@ -59,5 +62,13 @@ export default class ScorePage extends Abstract {
   backToCategory(callback) {
     this._callback.backToCategory = callback;
     this.getElement().querySelector('.score_category').addEventListener('click', this._backToCategory);
+  }
+
+  showInformation() {
+    this.getElement().querySelectorAll('.score-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('open');
+      })
+    })
   }
 }

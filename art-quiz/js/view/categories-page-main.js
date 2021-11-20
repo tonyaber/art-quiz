@@ -1,4 +1,4 @@
-import { LANGUAGE } from "../const.js";
+import { COUNT_CATEGORIES, COUNT_QUESTION, LANGUAGE } from "../const.js";
 import Abstract from "./abstract.js";
 const createCategoriesPageMain = (questions, answers, language) => {
   
@@ -6,13 +6,13 @@ const createCategoriesPageMain = (questions, answers, language) => {
     const templateCount = answers[index]['isPlay'] ? answers[index]['count'] + '/10' : '';
     return `<div class="categories_item ${answers[index]['isPlay'] ? 'passed' :''}">
       <h3>${index+1}</h3>
-      <img src="./assets/img/paintings/${questions[index*10].imageNum}.jpg" alt="category image">
+      <img src="./assets/img/paintings/${questions[index*COUNT_QUESTION].imageNum}.jpg" alt="category image">
       <span>${templateCount}</span>
       <button>${LANGUAGE[language]['score']}</button>
     </div>`
   }
   
-  const templateCategories = new Array(12).fill(null).map((item, index) => item = createItemTemplate(index)).join('');
+  const templateCategories = new Array(COUNT_CATEGORIES).fill(null).map((item, index) => item = createItemTemplate(index)).join('');
 
   return `<div class="categories_main">
     <div class="categories_top">

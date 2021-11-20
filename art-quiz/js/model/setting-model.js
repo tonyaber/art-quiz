@@ -3,11 +3,11 @@ export default class SettingModel {
     this._settings = {
       'language': 'en',
       'music': {
-        'value': 50,
+        'value': 0.5,
         'check': false
       },
       'volume': {
-        'value': 50,
+        'value': 0.5,
         'check': false
       },
       'time': {
@@ -31,7 +31,7 @@ export default class SettingModel {
     return this._settings['language'];
   }
 
-  setSetting(key, value, check) {
+  setSetting(key, value, check = this._settings[key]['check']) {
     this._settings[key]['value'] = value;
     this._settings[key]['check'] = check;
   }

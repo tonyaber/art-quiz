@@ -1,6 +1,7 @@
+import { LANGUAGE } from "../const.js";
 import Abstract from "./abstract.js"
 
-const createPopup = (question, check) => {
+const createPopup = (question, check, language) => {
   return `<div class="popup">
       <div class="modal_answer modal">
         <img class="check" src="./assets/svg/${check?'correct_answer':'wrong_answer'}.svg" alt="check">
@@ -9,24 +10,23 @@ const createPopup = (question, check) => {
           <span>${question.name}</span>
           <span>${question.author}</span>
           <span>${question.year}</span>
-          <button>Next</button>
+          <button>${LANGUAGE[language]['next']}</button>
         </div>
       </div>
     </div>`
 }
 
 export default class PopupAnswer extends Abstract {
-  constructor(question, check) {
+  constructor(question, check, language) {
     super();
     this._question = question;
     this._check = check;
+    this._language = language;
     this._nextImageHandler = this._nextImageHandler.bind(this);
   }
 
- 
-  
   getTemplate() {
-    return createPopup(this._question, this._check);
+    return createPopup(this._question, this._check, this._language);
   }
 
   _nextImageHandler(evt) {
