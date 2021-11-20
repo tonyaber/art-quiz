@@ -1,7 +1,7 @@
-import { createElement } from "../utils.js";
+import { createElement } from '../utils.js';
 
 export default class Abstract {
-  constructor(){
+  constructor() {
     this._callback = {};
   }
 
@@ -13,19 +13,20 @@ export default class Abstract {
   }
 
   destroy() {
-    this._element.classList.remove('show')
+    this._element.classList.remove('show');
     this._element.classList.add('hide');
     this._element.onanimationend = () => {
       this.getElement().remove();
       this._element = null;
-    }
+    };
   }
+
   destroyPopup() {
-    this._element.querySelector('.modal').classList.remove('modal-show')
+    this._element.querySelector('.modal').classList.remove('modal-show');
     this._element.querySelector('.modal').classList.add('modal-hide');
     this._element.onanimationend = () => {
       this.getElement().remove();
       this._element = null;
-    }
+    };
   }
 }

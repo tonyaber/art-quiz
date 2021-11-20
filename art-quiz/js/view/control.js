@@ -1,6 +1,5 @@
-class Control{
+class Control {
   constructor(parentNode = null, tagName = 'div', className = '', content = '') {
-    this.node;
     const el = document.createElement(tagName);
     el.className = className;
     el.textContent = content;
@@ -9,10 +8,10 @@ class Control{
     }
     this.node = el;
   }
-  destroy(){
+
+  destroy() {
     this.node.remove();
   }
-
 }
 
 export default Control;

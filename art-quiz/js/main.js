@@ -1,9 +1,5 @@
-import Quiz from "./quiz.js";
-
+import Quiz from './quiz.js';
 
 const quiz = new Quiz();
 
 quiz.init();
-
-
-

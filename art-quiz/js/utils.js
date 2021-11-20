@@ -1,35 +1,28 @@
 const renderElement = (element, container) => {
-  
-  element = element.getElement();
+  const newElement = element.getElement();
 
-  element.classList.add('hide', 'pages');
+  newElement.classList.add('hide', 'pages');
   requestAnimationFrame(() => {
-    element.classList.add('show')
+    newElement.classList.add('show');
   });
-  container.append(element);
-
+  container.append(newElement);
 };
 
-
 const renderPopup = (element, container) => {
+  const newElement = element.getElement();
 
-  element = element.getElement();
-
-  element.classList.add('pages');
+  newElement.classList.add('pages');
   requestAnimationFrame(() => {
-    element.querySelector('.modal').classList.add('modal-show')
+    newElement.querySelector('.modal').classList.add('modal-show');
   });
-  
-  container.append(element);
-}
+
+  container.append(newElement);
+};
 
 const createElement = (template) => {
-  const newElement = document.createElement('div');  
+  const newElement = document.createElement('div');
   newElement.innerHTML = template;
   return newElement;
 };
-
-
-
 
 export { renderElement, createElement, renderPopup };

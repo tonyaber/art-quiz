@@ -1,8 +1,7 @@
-import { COUNT_QUESTION, LANGUAGE } from "../const.js";
-import Abstract from "./abstract.js"
+import { COUNT_QUESTION, LANGUAGE } from '../const.js';
+import Abstract from './abstract.js';
 
 const createScorePage = (questions, answers, language, photos) => {
-  
   const createItemTemplate = (index) => {
     const srcImage = URL.createObjectURL(photos[index]);
     return `<div class="score-item ${answers[index] ? 'check' : ''}">
@@ -10,26 +9,27 @@ const createScorePage = (questions, answers, language, photos) => {
             <img class="check" src="./assets/svg/${answers[index] ? 'correct_answer' : 'wrong_answer'}.svg" alt="check">
             <img class="image" src="${srcImage}" alt="image">
             <div class="answer">
-              <span>${questions[index]['name']}</span>
-              <span>${questions[index]['author']}</span>
-              <span>${questions[index]['year']}</span>
+              <span>${questions[index].name}</span>
+              <span>${questions[index].author}</span>
+              <span>${questions[index].year}</span>
             </div>
-          </div>`
-  }
+          </div>`;
+  };
 
-  const itemTemplate = new Array(COUNT_QUESTION).fill(null).map((item, index) => item = createItemTemplate(index)).join('');
+  const itemTemplate = new Array(COUNT_QUESTION).fill(null)
+    .map((item, index) => createItemTemplate(index)).join('');
 
   return `<div class="score_main">
         <div class="score-top">
-          <button class="score_home">${LANGUAGE[language]['home']}</button>
-          <h2>${LANGUAGE[language]['score']}</h2>
-          <button class="score_category">${LANGUAGE[language]['categories']}</button>
+          <button class="score_home">${LANGUAGE[language].home}</button>
+          <h2>${LANGUAGE[language].score}</h2>
+          <button class="score_category">${LANGUAGE[language].categories}</button>
         </div>
         <div class="score-list">
           ${itemTemplate}
         </div>
-      </div>`
-}
+      </div>`;
+};
 
 export default class ScorePage extends Abstract {
   constructor(questions, answers, language, photos) {
@@ -42,6 +42,7 @@ export default class ScorePage extends Abstract {
     this._backToCategory = this._backToCategory.bind(this);
     this.showInformation();
   }
+
   getTemplate() {
     return createScorePage(this._questions, this._answers, this._language, this._photos);
   }
@@ -67,10 +68,10 @@ export default class ScorePage extends Abstract {
   }
 
   showInformation() {
-    this.getElement().querySelectorAll('.score-item').forEach(item => {
+    this.getElement().querySelectorAll('.score-item').forEach((item) => {
       item.addEventListener('click', () => {
         item.classList.toggle('open');
-      })
-    })
+      });
+    });
   }
 }

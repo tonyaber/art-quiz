@@ -1,5 +1,5 @@
-import { LANGUAGE } from "../../const.js";
-import Control from "../control.js";
+import { LANGUAGE } from '../../const.js';
+import Control from '../control.js';
 
 export default class SettingLanguageSelect extends Control {
   constructor(parentNode, settingModel, language) {
@@ -10,10 +10,10 @@ export default class SettingLanguageSelect extends Control {
 
     const languageSelect = new Control(this.node, 'select', '', '');
 
-    const englishOption = new Control(languageSelect.node, 'option', '', LANGUAGE[this._language]['english']);
+    const englishOption = new Control(languageSelect.node, 'option', '', LANGUAGE[this._language].english);
     englishOption.node.value = 'en';
 
-    const russianOption = new Control(languageSelect.node, 'option', '', LANGUAGE[this._language]['russian']);
+    const russianOption = new Control(languageSelect.node, 'option', '', LANGUAGE[this._language].russian);
     russianOption.node.value = 'ru';
 
     switch (this._value) {
@@ -26,6 +26,6 @@ export default class SettingLanguageSelect extends Control {
 
     languageSelect.node.onchange = (evt) => {
       this._settingModel.setLanguage(evt.target.value);
-    }
+    };
   }
 }

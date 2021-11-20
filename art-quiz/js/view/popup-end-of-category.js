@@ -1,15 +1,16 @@
-import { LANGUAGE } from "../const.js";
-import Abstract from "./abstract.js";
+import { LANGUAGE } from '../const.js';
+import Abstract from './abstract.js';
+
 const createPopup = (count, language) => {
-  const imageTemplate = count > 7 ? "./assets/img/bravo.jpg" : "./assets/img/try_again.jpg";
+  const imageTemplate = count > 7 ? './assets/img/bravo.jpg' : './assets/img/try_again.jpg';
   return `<div class="popup">
     <div class="modal_result modal">
-      <span>${LANGUAGE[language]['result']}</span>
+      <span>${LANGUAGE[language].result}</span>
       <span>${count}/10</span>
       <img src=${imageTemplate} alt="result">
-      <button>${LANGUAGE[language]['next']}</button>
-    </div>`
-}
+      <button>${LANGUAGE[language].next}</button>
+    </div>`;
+};
 
 export default class PopupEndOfCategory extends Abstract {
   constructor(count, language) {
@@ -34,9 +35,7 @@ export default class PopupEndOfCategory extends Abstract {
   }
 
   endOfCategory(callback) {
-    this._callback.nextCategory = callback;    
+    this._callback.nextCategory = callback;
     this.getElement().querySelector('button').addEventListener('click', this._endCategoryHandler);
   }
-
-
 }

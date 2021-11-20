@@ -1,21 +1,19 @@
-import Abstract from "./abstract.js";
-import { LANGUAGE } from "../const.js";
+import Abstract from './abstract.js';
+import { LANGUAGE } from '../const.js';
 
-const createStartPageMain = (language) => {
-  return `<div class="start_page_main">
+const createStartPageMain = (language) => `<div class="start_page_main">
     <div class="start_page">
       <div class="start_page_type">
         <button class="artists" value="artists">
-          <span><b>${LANGUAGE[language]['artists']}</b> ${LANGUAGE[language]['quiz']}</span>
+          <span><b>${LANGUAGE[language].artists}</b> ${LANGUAGE[language].quiz}</span>
         </button>
         <button class="pictures" value="pictures">
-          <span><b>${LANGUAGE[language]['pictures']}</b> ${LANGUAGE[language]['quiz']}</span>
+          <span><b>${LANGUAGE[language].pictures}</b> ${LANGUAGE[language].quiz}</span>
         </button>
       </div>
-      <button class="start_page_setting" value="setting"><img src="./assets/svg/setting.svg">${LANGUAGE[language]['settings']}</button>
+      <button class="start_page_setting" value="setting"><img src="./assets/svg/setting.svg">${LANGUAGE[language].settings}</button>
     </div>
-  </div>`
-}
+  </div>`;
 
 export default class StartPageMain extends Abstract {
   constructor(language) {
@@ -24,9 +22,9 @@ export default class StartPageMain extends Abstract {
     this._typeClickHandler = this._typeClickHandler.bind(this);
     this._showSettingHandler = this._showSettingHandler.bind(this);
   }
-  
+
   getTemplate() {
-    return createStartPageMain(this._language);    
+    return createStartPageMain(this._language);
   }
 
   _typeClickHandler(evt) {
@@ -36,13 +34,13 @@ export default class StartPageMain extends Abstract {
 
   _showSettingHandler(evt) {
     evt.preventDefault();
-    this._callback.setting()
+    this._callback.setting();
   }
 
   setTypeChangeHandler(callback) {
     this._callback.typeChange = callback;
-    this.getElement().querySelectorAll('.start_page_type button').forEach(item => {
-      item.addEventListener('click', this._typeClickHandler)
+    this.getElement().querySelectorAll('.start_page_type button').forEach((item) => {
+      item.addEventListener('click', this._typeClickHandler);
     });
   }
 
@@ -50,5 +48,4 @@ export default class StartPageMain extends Abstract {
     this._callback.setting = callback;
     this.getElement().querySelector('.start_page_setting').addEventListener('click', this._showSettingHandler);
   }
-
 }
