@@ -190,9 +190,9 @@ export default class Quiz {
 
     if (check) {
       this._popupAnswer = new PopupAnswer(this._question, true, this._language);
-      Sound.correctAnswer();
-      
-    } else {
+      Sound.correctAnswer();      
+    }
+    else {
       this._popupAnswer = new PopupAnswer(this._question, false, this._language);
       Sound.wrongAnswer();
     }
@@ -255,6 +255,7 @@ export default class Quiz {
   _saveSettingHandler() {
     this._startPageHeader.destroy();
     this._settingPage.destroy();
+<<<<<<< HEAD
 
     const oldLanguage = this._language;
 
@@ -267,6 +268,16 @@ export default class Quiz {
     }
     Sound.updateSetting(this._setting);
 
+=======
+    const oldLanguage = this._language;
+    this._setting = this.settingModel.getAllSetting();
+    this._language = this.settingModel.getLanguage();
+    if(oldLanguage!=this._language){
+
+      this._questionModel.changeLanguage(this._language);
+      this._questionModel.buildAllQuestions();
+    }
+>>>>>>> 80259acc119bb7c41028a6ff3430141d16c51d96
     this._renderStartPage();
   }
 }
