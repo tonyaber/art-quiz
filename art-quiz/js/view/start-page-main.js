@@ -2,7 +2,6 @@ import Abstract from "./abstract.js";
 import { LANGUAGE } from "../const.js";
 
 const createStartPageMain = (language) => {
-  console.log(language)
   return `<div class="start_page_main">
     <div class="start_page">
       <div class="start_page_type">

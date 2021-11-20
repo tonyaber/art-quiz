@@ -47,17 +47,14 @@ export default class Quiz {
   }
 
   init() {
-    this._questionModel = new QuestionModel();
-    this._questionModel.buildAllQuestions();
     this.settingModel = new SettingModel();
     this._setting = this.settingModel.getAllSetting();
     this._language = this.settingModel.getLanguage();
 
-    
-   
+    this._questionModel = new QuestionModel(this._language);
+    this._questionModel.buildAllQuestions();
     
     this._renderStartPage();
-
   }
 
   _renderStartPage() {
@@ -103,13 +100,13 @@ export default class Quiz {
     const timerCheck = this._setting['time']['check'];
     switch (this._type) {
       case 'artists':
-        this._questionPainingHeader = new QuestionArtistsHeader();
+        this._questionPainingHeader = new QuestionArtistsHeader(this._language);
         this._questionPainingHeader.backToMain(this._backToMainFromQuesting);
         this._checkTimer(timerCheck);
         this._questionPainingMain = new QuestionArtistsMain(this._question, this._allQuestions, answers, this._indexQuestion);
         break;
       default:
-        this._questionPainingHeader = new QuestionPaintingHeader(this._question);
+        this._questionPainingHeader = new QuestionPaintingHeader(this._question, this._language);
         this._questionPainingHeader.backToMain(this._backToMainFromQuesting);
         this._checkTimer(timerCheck);
         this._questionPainingMain = new QuestionPaintingMain(this._question, this._allQuestions, answers, this._indexQuestion);
@@ -168,7 +165,7 @@ export default class Quiz {
     } else {
       this._popupAnswer.destroyPopup();
       const countRightAnswer = this._questionModel.getCheckAnswerForCategory()[this._indexCategory]['count'];
-      this._popupEndOfCategory = new PopupEndOfCategory(countRightAnswer);
+      this._popupEndOfCategory = new PopupEndOfCategory(countRightAnswer, this._language);
       renderPopup(this._popupEndOfCategory, body);
       this._popupEndOfCategory.endOfCategory(this._endOfCategoryHandler);
     }
@@ -189,10 +186,10 @@ export default class Quiz {
     const check = (this._type == 'artists') ? answer == this._question.author : answer == this._question.imageNum;
 
     if (check) {
-      this._popupAnswer = new PopupAnswer(this._question, true);
+      this._popupAnswer = new PopupAnswer(this._question, true, this._language);
       
     } else {
-      this._popupAnswer = new PopupAnswer(this._question, false);
+      this._popupAnswer = new PopupAnswer(this._question, false, this._language);
     }
     this._questionModel.setCheckAnswer(this._indexQuestion, check)
     this._popupAnswer.nextImage(this._nextImageHandler)
@@ -207,6 +204,7 @@ export default class Quiz {
 
   _backToCategoryHandler() {
     this._scorePage.destroy();
+    this._categoriesPageHeader.destroy();
     this._renderCategoriesPage();
   }
   _backToMainFromQuesting() {
@@ -223,7 +221,7 @@ export default class Quiz {
     let questions = this._questionModel.getCategoriesQuestions(index);
     let answers = this._questionModel.getCheckAnswer(index);  
 
-    this._scorePage = new ScorePage(questions, answers);
+    this._scorePage = new ScorePage(questions, answers, this._language);
     this._scorePage.backToMain(this._backToMainFromScoreHandler);
     this._scorePage.backToCategory(this._backToCategoryHandler);
 
@@ -252,8 +250,14 @@ export default class Quiz {
   _saveSettingHandler() {
     this._startPageHeader.destroy();
     this._settingPage.destroy();
+    const oldLanguage = this._language;
     this._setting = this.settingModel.getAllSetting();
     this._language = this.settingModel.getLanguage();
+    if(oldLanguage!=this._language){
+
+      this._questionModel.changeLanguage(this._language);
+      this._questionModel.buildAllQuestions();
+    }
     this._renderStartPage();
   }
 }

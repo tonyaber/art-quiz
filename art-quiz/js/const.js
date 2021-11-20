@@ -13,8 +13,13 @@ const LANGUAGE = {
     'language': 'Language',
     'english': 'English',
     'russian': 'Russian',
-    'save': 'Save'
-    
+    'save': 'Save',
+    'next': 'Next',
+    'result': 'Result',
+    'question-artist': 'Who is the author of this picture?',
+    'question-painting': 'What picture did',
+    'question-painting-part2': ' write?',
+    'json':'./data/data-en.json',
   },
   'ru': {
     'artists': 'Художники',
@@ -30,7 +35,13 @@ const LANGUAGE = {
     'language': 'Язык',
     'english': 'Английский',
     'russian': 'Русский',
-    'save': 'Сохранить'
+    'save': 'Сохранить',
+    'next': 'Дальше',
+    'result': 'Результат',
+    'question-artist': 'Кто автор этой картины?',
+    'question-painting': 'Какую картинку написал',
+    'question-painting-part2': '?',
+    'json':'./data/data-ru.json'
   }
 }
 

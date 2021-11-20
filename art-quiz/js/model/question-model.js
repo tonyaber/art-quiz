@@ -1,5 +1,8 @@
+import { LANGUAGE } from "../const.js";
+
 export default class QuestionModel{
-  constructor() {
+  constructor(language) {
+    this._language = language;
     this._allQuestions = [];
     this._categories = [];
     this._type = '';
@@ -33,8 +36,12 @@ export default class QuestionModel{
     }
   }
 
+  changeLanguage(language) {
+    this._language = language;
+  }
+
   buildAllQuestions(){
-    fetch('./data/data-en.json')
+    fetch(LANGUAGE[this._language]['json'])
       .then((json) => json.json())
       .then((questions)=>this._allQuestions=questions)
   }

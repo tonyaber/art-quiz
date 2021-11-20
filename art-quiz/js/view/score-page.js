@@ -1,6 +1,7 @@
+import { LANGUAGE } from "../const.js";
 import Abstract from "./abstract.js"
 
-const createScorePage = (questions, answers) => {
+const createScorePage = (questions, answers, language) => {
   
   const createItemTemplate = (index) => {
     return `<div class="score-item ${answers[index] ? 'check' : ''}">
@@ -19,9 +20,9 @@ const createScorePage = (questions, answers) => {
 
   return `<div class="score_main">
         <div class="score-top">
-          <button class="score_home">Home</button>
-          <h2>Score</h2>
-          <button class="score_category">Category</button>
+          <button class="score_home">${LANGUAGE[language]['home']}</button>
+          <h2>${LANGUAGE[language]['score']}</h2>
+          <button class="score_category">${LANGUAGE[language]['categories']}</button>
         </div>
         <div class="score-list">
           ${itemTemplate}
@@ -30,15 +31,16 @@ const createScorePage = (questions, answers) => {
 }
 
 export default class ScorePage extends Abstract {
-  constructor(questions, answers) {
+  constructor(questions, answers, language) {
     super();
     this._questions = questions;
     this._answers = answers;
+    this._language = language;
     this._backToHomeHandler = this._backToHomeHandler.bind(this);
     this._backToCategory = this._backToCategory.bind(this);
   }
   getTemplate() {
-    return createScorePage(this._questions, this._answers);
+    return createScorePage(this._questions, this._answers, this._language);
   }
 
   _backToHomeHandler(evt) {

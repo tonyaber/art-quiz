@@ -1,11 +1,12 @@
+import { LANGUAGE } from "../const.js";
 import Abstract from "./abstract.js";
 
-const createQuestionArtistsPageHeader = () => { 
+const createQuestionArtistsPageHeader = (language) => { 
   return `<div class="question_header">
     <h1>ArtQuiz</h1>
     <div class="question_header_container">
       <img src="./assets/img/logo.png" alt="logo">
-      <h2>Who is the author of this picture ?</h2>
+      <h2>${LANGUAGE[language]['question-artist']}</h2>
       <div class="time">       
       </div>
     </div>
@@ -13,14 +14,15 @@ const createQuestionArtistsPageHeader = () => {
 }
 
 export default class QuestionArtistsHeader extends Abstract {
-  constructor() {
-    super();    
+  constructor(language) {
+    super();
+    this._language = language;
   
     this._backToMainHandler = this._backToMainHandler.bind(this);
   }
 
   getTemplate() {
-    return createQuestionArtistsPageHeader();
+    return createQuestionArtistsPageHeader(this._language);
   }
   
   getTimeContainer() {
