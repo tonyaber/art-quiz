@@ -17,12 +17,10 @@ import Timer from './view/timer.js';
 import Sound from './loader/sound.js';
 import PhotoLoader from './loader/photo-loader.js';
 import Spinner from './view/spinner.js';
-import Footer from './view/footer.js';
 
 const body = document.querySelector('body');
 const header = body.querySelector('header');
 const main = body.querySelector('main');
-const footer = body.querySelector('footer');
 
 export default class Quiz {
   constructor() {
@@ -73,10 +71,9 @@ export default class Quiz {
   _renderStartPage() {
     this._startPageHeader = new StartPageHeader();
     this._startPageMain = new StartPageMain(this._language);
-    this._footer = new Footer()
+
     renderElement(this._startPageHeader, header);
     renderElement(this._startPageMain, main);
-    renderElement(this._footer, footer);
     this._startPageMain.setTypeChangeHandler(this._typeChangeHandler);
     this._startPageMain.showSetting(this._showSettingHandlerMain);
   }
@@ -84,7 +81,6 @@ export default class Quiz {
   _renderCategoriesPage() {
     this._categoriesPageHeader = new CategoriesPageHeader();
     this._categoriesPageMain = new CategoriesPageMain(this._categoryPhoto, this._language);
-    this._categoriesPageMain.setQuestion(this._categories);
     this._categoriesPageMain.setAnswers(this._questionModel.getCheckAnswerForCategory());
     renderElement(this._categoriesPageHeader, header);
     renderElement(this._categoriesPageMain, main);
@@ -192,7 +188,7 @@ export default class Quiz {
   _typeChangeHandler(type) {
     this._startPageHeader.destroy();
     this._startPageMain.destroy();
-    this._footer.destroy();
+
     renderElement(this._spinner, main);
     this._type = type;
     this._photoLoader.setType(type);
@@ -303,8 +299,6 @@ export default class Quiz {
 
   _showSettingHandlerMain() {
     this._startPageMain.destroy();
-    this._footer.destroy();
-
     this._settingPage = new SettingPage(this.settingModel, this._language);
     this._settingPage.init();
     this._settingPage.saveSetting(this._saveSettingHandler);

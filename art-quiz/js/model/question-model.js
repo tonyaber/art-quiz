@@ -25,18 +25,14 @@ export default class QuestionModel {
     if (localStorage.getItem('tonyaber-answers')) {
       this._answers = JSON.parse(localStorage.getItem('tonyaber-answers'));
     } else {
-      this._answers.artists = new Array(COUNT_CATEGORIES).fill(null).map((item, index) => index).forEach((item) => {
-        this._answers.artists[item] = { isPlay: false };
-        for (let i = 0; i < COUNT_QUESTION; i++) {
-          this._answers.artists[item][i] = false;
-        }
-      });
-      this._answers.pictures = new Array(COUNT_CATEGORIES).fill(null).map((item, index) => index).forEach((item) => {
-        this._answers.pictures[item] = { isPlay: false };
-        for (let i = 0; i < COUNT_QUESTION; i++) {
-          this._answers.pictures[item][i] = false;
-        }
-      });
+      for (const key in this._answers) {
+        new Array(12).fill(null).map((item, index) => index).forEach((item) => {
+          this._answers[key][item] = { isPlay: false };
+          for (let i = 0; i < 10; i++) {
+            this._answers[key][item][i] = false;
+          }
+        });
+      }
     }
   }
 

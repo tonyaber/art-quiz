@@ -40,10 +40,6 @@ export default class CategoriesPageMain extends Abstract {
     this._showSettingHandler = this._showSettingHandler.bind(this);
   }
 
-  setQuestion(questions) {
-    this._questions = questions;
-  }
-
   setAnswers(answers) {
     this._answers = answers;
   }
