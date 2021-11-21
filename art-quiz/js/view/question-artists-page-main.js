@@ -39,14 +39,14 @@ export default class QuestionArtistsMain extends Abstract {
     return createQuestionArtistsPageMain(this._variants, this._answers, this._index, this._photo);
   }
 
-  _checkAnswerHandler(evt) {
-    this._callback.checkAnswer(evt.target.textContent);
+  _checkAnswerHandler(index) {
+    this._callback.checkAnswer(this._variants[index]);
   }
 
   checkAnswer(callback) {
     this._callback.checkAnswer = callback;
-    this.getElement().querySelectorAll('.question_painting_answers li').forEach((item) => {
-      item.addEventListener('click', this._checkAnswerHandler);
+    this.getElement().querySelectorAll('.question_painting_answers li').forEach((item, index) => {
+      item.addEventListener('click', ()=>this._checkAnswerHandler(index));
     });
   }
 }

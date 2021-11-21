@@ -45,14 +45,14 @@ export default class QuestionPaintingsMain extends Abstract {
     return createQuestionPaintingsPageMain(this._variants, this._answers, this._index, this._photos);
   }
 
-  _checkAnswerHandler(evt) {
-    this._callback.checkAnswer(evt.target.alt);
+  _checkAnswerHandler(index) {
+    this._callback.checkAnswer(this._variants[index].imageNum);
   }
 
   checkAnswer(callback) {
     this._callback.checkAnswer = callback;
-    this.getElement().querySelectorAll('.question li').forEach((item) => {
-      item.addEventListener('click', this._checkAnswerHandler);
+    this.getElement().querySelectorAll('.question li').forEach((item, index) => { 
+      item.addEventListener('click', ()=>this._checkAnswerHandler(index));
     });
   }
 }

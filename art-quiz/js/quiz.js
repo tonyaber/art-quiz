@@ -245,7 +245,6 @@ export default class Quiz {
     if (this._timer) {
       this._timer.stopInterval();
     }
-
     const check = (this._type === 'artists') ? answer === this._question.author : answer === this._question.imageNum;
     if (check) {
       this._popupAnswer = new PopupAnswer(this._question, true, this._language);
