@@ -856,23 +856,26 @@ header img {
   transition: all 0.5s;
 }
 
-footer {  
-  padding: 30px;
-  text-align: right;
+footer {    
+  margin-top: 700px;
+  position: relative;
 }
 
 footer a{
+  display: block;
+  margin: 0 auto;
   text-decoration: none;
   color: #660033;
   font-size: 16px;
   font-weight: bold;
+  text-align: center;
 }
 
 footer img {
   display: block;
   width: 200px;
   height: auto;
-  margin: 0 0 0 auto;
+  margin: 0 auto;
 }
 .spinner {
   width: 100%;
@@ -885,7 +888,9 @@ footer img {
 @media (max-height: 1024px){
   body {
     background-attachment: fixed;
-    overflow: scroll;
+  }
+  .start_page_setting{
+    margin-top: 30px;
   }
   .question_painting_image {
     width: 50vh;
@@ -901,14 +906,24 @@ footer img {
   .popup{
     padding-top: 20px;
   }
-  .question li img{
+  .question li{
     width: 35vh;
   }
   .question{
     justify-content: space-around;
   }
-  .question li{
-    width: auto;
+  .settings-container > div {
+    height: 220px;
+  }
+  .settings-container img{
+    margin: 10px auto;
+  }
+  .settings-container h3{
+    font-size: 20px;
+    line-height: 26px;
+  }
+  footer { 
+    display: none;
   }
 }
 
@@ -978,6 +993,9 @@ footer img {
   }
   .question li {
     width: calc(50% - 10px);
+  }
+  footer { 
+    display: none;
   }
 }
 
