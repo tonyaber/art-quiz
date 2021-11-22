@@ -11,6 +11,7 @@ import ScorePage from './view/score-page.js';
 import QuestionArtistsHeader from './view/question-artists-page-header.js';
 import QuestionArtistsMain from './view/question-artists-page-main.js';
 import SettingPage from './view/setting-page.js';
+import Footer from './view/footer.js';
 import SettingModel from './model/setting-model.js';
 import QuestionModel from './model/question-model.js';
 import Timer from './view/timer.js';
@@ -21,6 +22,7 @@ import Spinner from './view/spinner.js';
 const body = document.querySelector('body');
 const header = body.querySelector('header');
 const main = body.querySelector('main');
+const footer = body.querySelector('footer');
 
 export default class Quiz {
   constructor() {
@@ -71,9 +73,11 @@ export default class Quiz {
   _renderStartPage() {
     this._startPageHeader = new StartPageHeader();
     this._startPageMain = new StartPageMain(this._language);
+    this._footer = new Footer();
 
     renderElement(this._startPageHeader, header);
     renderElement(this._startPageMain, main);
+    renderElement(this._footer, footer);
     this._startPageMain.setTypeChangeHandler(this._typeChangeHandler);
     this._startPageMain.showSetting(this._showSettingHandlerMain);
   }
@@ -188,6 +192,7 @@ export default class Quiz {
   _typeChangeHandler(type) {
     this._startPageHeader.destroy();
     this._startPageMain.destroy();
+    this._footer.destroy();
 
     renderElement(this._spinner, main);
     this._type = type;
@@ -298,6 +303,7 @@ export default class Quiz {
 
   _showSettingHandlerMain() {
     this._startPageMain.destroy();
+    this._footer.destroy();
     this._settingPage = new SettingPage(this.settingModel, this._language);
     this._settingPage.init();
     this._settingPage.saveSetting(this._saveSettingHandler);

@@ -856,9 +856,8 @@ header img {
   transition: all 0.5s;
 }
 
-footer {    
-  margin-top: 700px;
-  position: relative;
+footer .pages {    
+  top: calc(100vh - 120px);
 }
 
 footer a{
@@ -922,9 +921,6 @@ footer img {
     font-size: 20px;
     line-height: 26px;
   }
-  footer { 
-    display: none;
-  }
 }
 
 @media (max-height: 800px){
@@ -944,6 +940,15 @@ footer img {
   }
   .question_painting_answers li{
     padding: 15px;
+  }
+
+  footer img{
+    width: 100px;
+    margin: 0;
+  }
+  footer a {
+    text-align: left;
+    margin-left: 10px;
   }
 }
 
@@ -994,9 +999,6 @@ footer img {
   .question li {
     width: calc(50% - 10px);
   }
-  footer { 
-    display: none;
-  }
 }
 
 @media (max-width: 800px){
@@ -1034,7 +1036,7 @@ footer img {
   }
 
   .start_page_setting{
-    margin-top: 60px;
+    margin-top: 30px;
     width: 150px;
     font-size: 16px;
   }
