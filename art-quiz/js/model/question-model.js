@@ -1,4 +1,4 @@
-import { COUNT_CATEGORIES, COUNT_QUESTION, LANGUAGE } from '../const.js';
+import { COUNT_QUESTION, LANGUAGE } from '../const.js';
 
 export default class QuestionModel {
   constructor(language) {
@@ -25,14 +25,18 @@ export default class QuestionModel {
     if (localStorage.getItem('tonyaber-answers')) {
       this._answers = JSON.parse(localStorage.getItem('tonyaber-answers'));
     } else {
-      for (const key in this._answers) {
-        new Array(12).fill(null).map((item, index) => index).forEach((item) => {
-          this._answers[key][item] = { isPlay: false };
-          for (let i = 0; i < 10; i++) {
-            this._answers[key][item][i] = false;
-          }
-        });
-      }
+      new Array(12).fill(null).map((item, index) => index).forEach((item) => {
+        this._answers.artists[item] = { isPlay: false };
+        for (let i = 0; i < 10; i++) {
+          this._answers.artists[item][i] = false;
+        }
+      });
+      new Array(12).fill(null).map((item, index) => index).forEach((item) => {
+        this._answers.pictures[item] = { isPlay: false };
+        for (let i = 0; i < 10; i++) {
+          this._answers.pictures[item][i] = false;
+        }
+      });
     }
   }
 

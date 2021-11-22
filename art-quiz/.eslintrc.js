@@ -19,7 +19,6 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-restricted-syntax': 'off',
     'no-await-in-loop': 'off',
-    'guard-for-in': 'off',
     'no-console': 'off',
   },
 };

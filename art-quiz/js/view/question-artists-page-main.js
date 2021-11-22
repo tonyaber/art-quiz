@@ -46,7 +46,7 @@ export default class QuestionArtistsMain extends Abstract {
   checkAnswer(callback) {
     this._callback.checkAnswer = callback;
     this.getElement().querySelectorAll('.question_painting_answers li').forEach((item, index) => {
-      item.addEventListener('click', ()=>this._checkAnswerHandler(index));
+      item.addEventListener('click', () => this._checkAnswerHandler(index));
     });
   }
 }
