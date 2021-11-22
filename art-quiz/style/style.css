@@ -98,6 +98,10 @@ header{
   }
 }
 
+button,
+.categories_item {
+  cursor: pointer;
+}
 
 header {
   box-sizing: border-box;
@@ -1051,7 +1055,8 @@ footer img {
     height: auto;
   }
 
-  .categories_top {
+  .categories_top, 
+  .score-top {
     gap: 20px;
   }
 
@@ -1157,6 +1162,12 @@ footer img {
   .categories_top button{
     width: 65%;
   }
+
+  .categories_top h2,
+  .score-top h2{
+    order: -1;
+  }
+
   .categories_top .categories_settings {
     justify-content: flex-start;
   }
