@@ -7,7 +7,7 @@
  - MVC
  
  ## Application - prototype:
- - [Art Quiz] (https://play.google.com/store/apps/details?id=in.imaginacion.artquiz)
-  - [Art Quiz] (https://play.google.com/store/apps/details?id=com.ironwaterstudio.artquiz)
+ - [Art Quiz](https://play.google.com/store/apps/details?id=in.imaginacion.artquiz)
+ - [Art Quiz](https://play.google.com/store/apps/details?id=com.ironwaterstudio.artquiz)
 
  ## [Deploy](https://tonyaber.github.io/art-quiz/art-quiz/)
